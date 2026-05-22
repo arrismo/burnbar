@@ -61,7 +61,8 @@ extension CodexBarCLI {
             }
             if !output.jsonOnly {
                 let total = usage.reduce(0) { $0 + $1.cost }
-                print("Published \(usage.count) days for \(options.provider.rawValue): \(UsageFormatter.usdString(total))")
+                let formattedTotal = UsageFormatter.usdString(total)
+                print("Published \(usage.count) days for \(options.provider.rawValue): \(formattedTotal)")
                 print(client.markdown(
                     badgeToken: options.project!.badgeToken,
                     provider: options.burnbadgeProvider,

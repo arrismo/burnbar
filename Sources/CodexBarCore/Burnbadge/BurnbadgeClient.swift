@@ -61,23 +61,36 @@ public final class BurnbadgeClient: Sendable {
     }
 
     public func markdown(badgeToken: String, provider: BurnbadgeProvider?, days: Int? = nil) -> String {
-        let base = URL(string: "/api/shields/\(badgeToken)/image", relativeTo: self.baseURL)?.absoluteURL
-        var components = base.flatMap { URLComponents(url: $0, resolvingAgainstBaseURL: false) }
-        var queryItems: [URLQueryItem] = []
-        if let days {
-            queryItems.append(URLQueryItem(name: "days", value: String(days)))
-        }
+        let imageURL = self.shieldsEndpointURL(badgeToken: badgeToken, provider: provider, days: days)
+        let label = provider.map { "\($0.rawValue) spend" } ?? "AI spend"
+        return "![\(label)](\(imageURL))"
+    }
+
+    public func shieldsEndpointURL(
+        badgeToken: String,
+        provider: BurnbadgeProvider?,
+        days: Int? = nil) -> String
+    {
+        let badgeURL = self.badgeEndpointURL(badgeToken: badgeToken, days: days)
+        var components = URLComponents(string: "https://img.shields.io/endpoint")!
+        var queryItems = [URLQueryItem(name: "url", value: badgeURL)]
         if let provider {
             let logoName = Self.logoName(for: provider)
             if !logoName.isEmpty {
                 queryItems.append(URLQueryItem(name: "logo", value: logoName))
             }
         }
-        components?.queryItems = queryItems.isEmpty ? nil : queryItems
-        let imageURL = components?.url?.absoluteString
-            ?? URL(string: "/api/shields/\(badgeToken)/image", relativeTo: self.baseURL)!.absoluteString
-        let label = provider.map { "\($0.rawValue) spend" } ?? "AI spend"
-        return "![\(label)](\(imageURL))"
+        components.queryItems = queryItems
+        return components.url!.absoluteString
+    }
+
+    private func badgeEndpointURL(badgeToken: String, days: Int?) -> String {
+        let base = URL(string: "/api/badge/\(badgeToken)", relativeTo: self.baseURL)!.absoluteURL
+        var components = URLComponents(url: base, resolvingAgainstBaseURL: false)!
+        if let days {
+            components.queryItems = [URLQueryItem(name: "days", value: String(days))]
+        }
+        return components.url!.absoluteString
     }
 
     private func makeRequest(path: String, method: String) throws -> URLRequest {
