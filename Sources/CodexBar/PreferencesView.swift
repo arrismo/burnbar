@@ -89,7 +89,7 @@ struct PreferencesView: View {
                 .tabItem { Label(L("tab_display"), systemImage: "eye") }
                 .tag(PreferencesTab.display)
 
-            BurnbadgePane()
+            BurnbadgePane(settings: self.settings, store: self.store)
                 .tabItem { Label("Burnbadge", systemImage: "flame") }
                 .tag(PreferencesTab.burnbadge)
 

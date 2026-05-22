@@ -4,9 +4,10 @@ import SwiftUI
 
 @MainActor
 struct BurnbadgePane: View {
-    private static let supportedProviders: [UsageProvider] = [.codex, .claude]
+    let settings: SettingsStore
+    let store: UsageStore
 
-    @State private var selectedProvider: UsageProvider = .codex
+    @State private var selectedProvider: UsageProvider?
     @State private var projectName = ""
     @State private var days = 30
     @State private var config = BurnbarConfig()
@@ -15,6 +16,10 @@ struct BurnbadgePane: View {
     @State private var errorMessage: String?
 
     private let configStore = BurnbarConfigStore()
+
+    private var enabledProviders: [UsageProvider] {
+        self.settings.enabledProvidersOrdered(metadataByProvider: self.store.providerMetadata)
+    }
 
     var body: some View {
         ScrollView(.vertical, showsIndicators: true) {
@@ -40,98 +45,113 @@ struct BurnbadgePane: View {
                         VStack(alignment: .leading, spacing: 4) {
                             Text("Provider")
                                 .font(.body)
-                            Text("Codex and Claude local cost scans are supported today.")
-                                .font(.footnote)
-                                .foregroundStyle(.tertiary)
-                        }
-                        Spacer()
-                        Picker("Provider", selection: self.$selectedProvider) {
-                            ForEach(Self.supportedProviders, id: \.self) { provider in
-                                Text(Self.displayName(for: provider)).tag(provider)
+                            if self.enabledProviders.isEmpty {
+                                Text("No providers connected. Enable a provider in the Providers tab first.")
+                                    .font(.footnote)
+                                    .foregroundStyle(.tertiary)
+                            } else {
+                                Text("Only connected providers are shown. Enable more in the Providers tab.")
+                                    .font(.footnote)
+                                    .foregroundStyle(.tertiary)
                             }
                         }
-                        .labelsHidden()
-                        .pickerStyle(.menu)
-                        .frame(maxWidth: 180)
-                    }
-
-                    HStack(alignment: .top, spacing: 12) {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("Badge name")
-                                .font(.body)
-                            Text("Used on Burnbadge to identify this project.")
-                                .font(.footnote)
-                                .foregroundStyle(.tertiary)
-                        }
                         Spacer()
-                        TextField(self.defaultProjectName, text: self.$projectName)
-                            .textFieldStyle(.roundedBorder)
-                            .frame(width: 220)
+                        if self.enabledProviders.isEmpty {
+                            Text("None connected")
+                                .foregroundStyle(.tertiary)
+                        } else {
+                            Picker("Provider", selection: self.$selectedProvider) {
+                                ForEach(self.enabledProviders, id: \.self) { provider in
+                                    Text(Self.displayName(for: provider)).tag(provider as UsageProvider?)
+                                }
+                            }
+                            .labelsHidden()
+                            .pickerStyle(.menu)
+                            .frame(maxWidth: 180)
+                        }
                     }
 
-                    Stepper(value: self.$days, in: 1...366, step: 1) {
-                        Text("Publish the last \(self.days) days")
-                    }
-
-                    HStack(spacing: 8) {
-                        Button(self.project == nil ? "Create badge" : "Create new badge") {
-                            self.runCreate()
+                    if self.selectedProvider != nil {
+                        HStack(alignment: .top, spacing: 12) {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("Badge name")
+                                    .font(.body)
+                                Text("Used on Burnbadge to identify this project.")
+                                    .font(.footnote)
+                                    .foregroundStyle(.tertiary)
+                            }
+                            Spacer()
+                            TextField(self.defaultProjectName, text: self.$projectName)
+                                .textFieldStyle(.roundedBorder)
+                                .frame(width: 220)
                         }
-                        .disabled(self.isWorking)
 
-                        Button("Sync now") {
-                            self.runSync()
+                        Stepper(value: self.$days, in: 1...366, step: 1) {
+                            Text("Publish the last \(self.days) days")
                         }
-                        .disabled(self.isWorking || self.project == nil)
 
-                        Button("Create & sync") {
-                            self.runCreateAndSync()
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .disabled(self.isWorking)
+                        HStack(spacing: 8) {
+                            Button(self.project == nil ? "Create badge" : "Create new badge") {
+                                self.runCreate()
+                            }
+                            .disabled(self.isWorking)
 
-                        if self.isWorking {
-                            ProgressView()
-                                .controlSize(.small)
+                            Button("Sync now") {
+                                self.runSync()
+                            }
+                            .disabled(self.isWorking || self.project == nil)
+
+                            Button("Create & sync") {
+                                self.runCreateAndSync()
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .disabled(self.isWorking)
+
+                            if self.isWorking {
+                                ProgressView()
+                                    .controlSize(.small)
+                            }
                         }
                     }
                 }
 
-                Divider()
+                if self.selectedProvider != nil {
+                    Divider()
 
-                SettingsSection(contentSpacing: 12) {
-                    Text("CURRENT BADGE")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                        .textCase(.uppercase)
+                    SettingsSection(contentSpacing: 12) {
+                        Text("CURRENT BADGE")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .textCase(.uppercase)
 
-                    if let project = self.project {
-                        LabeledContent("Provider", value: Self.displayName(for: project.provider))
-                        LabeledContent("Badge token", value: project.badgeToken)
-                        LabeledContent("Last published", value: self.lastPublishedText(project.lastPublishedAt))
+                        if let project = self.project {
+                            LabeledContent("Provider", value: Self.displayName(for: project.provider))
+                            LabeledContent("Badge token", value: project.badgeToken)
+                            LabeledContent("Last published", value: self.lastPublishedText(project.lastPublishedAt))
 
-                        VStack(alignment: .leading, spacing: 6) {
-                            Text("README markdown")
-                                .font(.body)
-                            Text(self.markdown(for: project))
-                                .font(.system(.footnote, design: .monospaced))
-                                .textSelection(.enabled)
-                                .padding(8)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .background(Color.secondary.opacity(0.08), in: RoundedRectangle(cornerRadius: 8))
+                            VStack(alignment: .leading, spacing: 6) {
+                                Text("README markdown")
+                                    .font(.body)
+                                Text(self.markdown(for: project))
+                                    .font(.system(.footnote, design: .monospaced))
+                                    .textSelection(.enabled)
+                                    .padding(8)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .background(Color.secondary.opacity(0.08), in: RoundedRectangle(cornerRadius: 8))
+                            }
+
+                            HStack(spacing: 8) {
+                                Button("Copy markdown") { self.copyMarkdown(project) }
+                                Button("Open badge") { NSWorkspace.shared.open(project.badgeUrl) }
+                                Button("Open chart") { NSWorkspace.shared.open(project.chartUrl) }
+                            }
+                        } else if let provider = self.selectedProvider {
+                            Text(
+                                "No Burnbadge project has been created for " +
+                                    "\(Self.displayName(for: provider)) yet.")
+                                .font(.footnote)
+                                .foregroundStyle(.tertiary)
                         }
-
-                        HStack(spacing: 8) {
-                            Button("Copy markdown") { self.copyMarkdown(project) }
-                            Button("Open badge") { NSWorkspace.shared.open(project.badgeUrl) }
-                            Button("Open chart") { NSWorkspace.shared.open(project.chartUrl) }
-                        }
-                    } else {
-                        Text(
-                            "No Burnbadge project has been created for " +
-                                "\(Self.displayName(for: self.selectedProvider)) yet.")
-                            .font(.footnote)
-                            .foregroundStyle(.tertiary)
                     }
                 }
 
@@ -151,7 +171,17 @@ struct BurnbadgePane: View {
             .padding(.horizontal, 20)
             .padding(.vertical, 12)
         }
-        .onAppear { self.loadConfig() }
+        .onAppear {
+            self.loadConfig()
+            if self.selectedProvider == nil {
+                self.selectedProvider = self.enabledProviders.first
+            }
+        }
+        .onChange(of: self.enabledProviders) { _, newProviders in
+            if self.selectedProvider == nil || !newProviders.contains(self.selectedProvider!) {
+                self.selectedProvider = newProviders.first
+            }
+        }
         .onChange(of: self.selectedProvider) { _, _ in
             self.projectName = ""
             self.statusMessage = nil
@@ -160,15 +190,18 @@ struct BurnbadgePane: View {
     }
 
     private var project: BurnbarProjectConfig? {
-        self.config.projects[BurnbarConfigStore.key(for: self.selectedProvider)]
+        guard let provider = self.selectedProvider else { return nil }
+        return self.config.projects[BurnbarConfigStore.key(for: provider)]
     }
 
     private var burnbadgeProvider: BurnbadgeProvider {
-        BurnbadgeProvider(usageProvider: self.selectedProvider) ?? .openai
+        guard let provider = self.selectedProvider else { return .openai }
+        return BurnbadgeProvider(usageProvider: provider) ?? .openai
     }
 
     private var defaultProjectName: String {
-        "\(Self.displayName(for: self.selectedProvider)) README badge"
+        guard let provider = self.selectedProvider else { return "README badge" }
+        return "\(Self.displayName(for: provider)) README badge"
     }
 
     private func loadConfig() {
@@ -197,6 +230,7 @@ struct BurnbadgePane: View {
 
     @discardableResult
     private func createProject() async -> Bool {
+        guard let provider = self.selectedProvider else { return false }
         self.isWorking = true
         self.statusMessage = "Creating Burnbadge project…"
         self.errorMessage = nil
@@ -213,8 +247,8 @@ struct BurnbadgePane: View {
                 source: "burnbar")
             self.config = try self.configStore.update { config in
                 config.baseURL = self.config.baseURL
-                config.projects[BurnbarConfigStore.key(for: self.selectedProvider)] = BurnbarProjectConfig(
-                    provider: self.selectedProvider,
+                config.projects[BurnbarConfigStore.key(for: provider)] = BurnbarProjectConfig(
+                    provider: provider,
                     burnbadgeProvider: self.burnbadgeProvider,
                     name: name,
                     project: project)
@@ -228,7 +262,7 @@ struct BurnbadgePane: View {
     }
 
     private func syncProject() async {
-        guard let project = self.project else { return }
+        guard let project = self.project, let provider = self.selectedProvider else { return }
         self.isWorking = true
         self.statusMessage = "Scanning local usage and publishing totals…"
         self.errorMessage = nil
@@ -236,13 +270,13 @@ struct BurnbadgePane: View {
 
         do {
             let snapshot = try await CostUsageFetcher().loadTokenSnapshot(
-                provider: self.selectedProvider,
+                provider: provider,
                 forceRefresh: true,
                 historyDays: self.days,
                 refreshPricingInBackground: false)
             let usage = BurnbadgeUsageAdapter.dailyUsage(from: snapshot)
             guard !usage.isEmpty else {
-                self.errorMessage = "No daily cost usage found for \(Self.displayName(for: self.selectedProvider))."
+                self.errorMessage = "No daily cost usage found for \(Self.displayName(for: provider))."
                 return
             }
 
@@ -252,7 +286,7 @@ struct BurnbadgePane: View {
                 provider: project.burnbadgeProvider,
                 usage: usage)
             self.config = try self.configStore.update { config in
-                config.projects[BurnbarConfigStore.key(for: self.selectedProvider)]?.lastPublishedAt = Date()
+                config.projects[BurnbarConfigStore.key(for: provider)]?.lastPublishedAt = Date()
             }
             let total = usage.reduce(0) { $0 + $1.cost }
             self.statusMessage = "Published \(usage.count) days: \(UsageFormatter.usdString(total))."
