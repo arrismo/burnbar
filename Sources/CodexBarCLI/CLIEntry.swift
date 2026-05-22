@@ -38,6 +38,14 @@ enum CodexBarCLI {
                 await self.runCost(invocation.parsedValues)
             case ["serve"]:
                 await self.runServe(invocation.parsedValues)
+            case ["burnbadge", "create"]:
+                await self.runBurnbadgeCreate(invocation.parsedValues)
+            case ["burnbadge", "sync"]:
+                await self.runBurnbadgeSync(invocation.parsedValues)
+            case ["burnbadge", "markdown"]:
+                await self.runBurnbadgeMarkdown(invocation.parsedValues)
+            case ["burnbadge", "status"]:
+                await self.runBurnbadgeStatus(invocation.parsedValues)
             case ["config", "validate"]:
                 self.runConfigValidate(invocation.parsedValues)
             case ["config", "dump"]:
@@ -74,6 +82,7 @@ enum CodexBarCLI {
         let configProviderToggleSignature = CommandSignature.describe(ConfigProviderToggleOptions())
         let configSetAPIKeySignature = CommandSignature.describe(ConfigSetAPIKeyOptions())
         let cacheSignature = CommandSignature.describe(CacheOptions())
+        let burnbadgeSignature = CommandSignature.describe(BurnbadgeOptions())
 
         return [
             CommandDescriptor(
@@ -91,6 +100,34 @@ enum CodexBarCLI {
                 abstract: "Serve usage and cost JSON over localhost HTTP",
                 discussion: nil,
                 signature: serveSignature),
+            CommandDescriptor(
+                name: "burnbadge",
+                abstract: "Create and publish Burnbadge README badges",
+                discussion: nil,
+                signature: CommandSignature(),
+                subcommands: [
+                    CommandDescriptor(
+                        name: "create",
+                        abstract: "Create a Burnbadge project and save its tokens locally",
+                        discussion: nil,
+                        signature: burnbadgeSignature),
+                    CommandDescriptor(
+                        name: "sync",
+                        abstract: "Publish local cost usage to Burnbadge",
+                        discussion: nil,
+                        signature: burnbadgeSignature),
+                    CommandDescriptor(
+                        name: "markdown",
+                        abstract: "Print README badge markdown",
+                        discussion: nil,
+                        signature: burnbadgeSignature),
+                    CommandDescriptor(
+                        name: "status",
+                        abstract: "Fetch public Burnbadge badge status",
+                        discussion: nil,
+                        signature: burnbadgeSignature),
+                ],
+                defaultSubcommandName: "status"),
             CommandDescriptor(
                 name: "config",
                 abstract: "Config utilities",

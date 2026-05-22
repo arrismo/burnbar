@@ -100,6 +100,32 @@ extension CodexBarCLI {
         """
     }
 
+    static func burnbadgeHelp(version: String) -> String {
+        """
+        Burnbar \(version)
+
+        Usage:
+          codexbar burnbadge create --provider <codex|claude>
+                                    [--base-url <url>] [--name <name>] [--days <days>]
+          codexbar burnbadge sync --provider <codex|claude>
+                                  [--base-url <url>] [--days <days>] [--refresh]
+          codexbar burnbadge markdown --provider <codex|claude> [--base-url <url>] [--days <days>]
+          codexbar burnbadge status --provider <codex|claude>
+                                    [--base-url <url>] [--days <days>] [--format text|json]
+
+        Description:
+          Create and publish Burnbadge README badges from local Codex/Claude cost scans.
+          Tokens are stored locally in ~/.burnbar/config.json with restrictive permissions.
+          Provider credentials are not sent to Burnbadge; only normalized daily spend totals are uploaded.
+
+        Examples:
+          codexbar burnbadge create --provider codex --name "Codex README badge"
+          codexbar burnbadge sync --provider codex --days 30
+          codexbar burnbadge markdown --provider claude --days 30
+          codexbar burnbadge status --provider codex --format json --pretty
+        """
+    }
+
     static func configHelp(version: String) -> String {
         """
         CodexBar \(version)
@@ -188,6 +214,7 @@ extension CodexBarCLI {
                        [--provider \(ProviderHelp.list)] [--no-color] [--pretty] [--refresh]
           codexbar serve [--port <port>] [--refresh-interval <seconds>]
                        [--json-output] [--log-level <trace|verbose|debug|info|warning|error|critical>] [-v|--verbose]
+          codexbar burnbadge <create|sync|markdown|status> --provider <codex|claude>
           codexbar config <validate|dump|providers> [--format text|json]
                                         [--json]
                                         [--json-only]
@@ -214,6 +241,8 @@ extension CodexBarCLI {
           codexbar --provider gemini
           codexbar cost --provider claude --format json --pretty
           codexbar serve --port 8080
+          codexbar burnbadge create --provider codex --name "Codex README badge"
+          codexbar burnbadge sync --provider codex --days 30
           codexbar config validate --format json --pretty
           codexbar config enable --provider grok
           codexbar config set-api-key --provider elevenlabs --stdin

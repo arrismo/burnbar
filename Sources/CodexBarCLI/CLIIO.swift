@@ -29,6 +29,8 @@ extension CodexBarCLI {
             print(Self.costHelp(version: version))
         case "serve":
             print(Self.serveHelp(version: version))
+        case "burnbadge", "create", "sync", "markdown", "status":
+            print(Self.burnbadgeHelp(version: version))
         case "config", "validate", "dump":
             print(Self.configHelp(version: version))
         case "cache", "clear":
@@ -53,11 +55,8 @@ extension CodexBarCLI {
 
     static func currentVersion(bundleVersion: String?, executablePath: String?) -> String? {
         if let executablePath, !executablePath.isEmpty {
-            let executableURL = URL(fileURLWithPath: executablePath).resolvingSymlinksInPath()
+            let executableURL = URL(fileURLWithPath: executablePath).absoluteURL
             if let version = Self.adjacentVersionFileVersion(for: executableURL) {
-                return version
-            }
-            if let version = Self.containingAppVersion(for: executableURL) {
                 return version
             }
         }
@@ -65,20 +64,23 @@ extension CodexBarCLI {
     }
 
     static func containingAppVersion(for executableURL: URL) -> String? {
-        var currentURL = executableURL.deletingLastPathComponent()
+        var path = (executableURL.path as NSString).deletingLastPathComponent
         let fileManager = FileManager.default
 
-        while currentURL.path != currentURL.deletingLastPathComponent().path {
-            if currentURL.pathExtension == "app" {
-                let infoURL = currentURL
-                    .appendingPathComponent("Contents")
+        while !path.isEmpty, path != "/" {
+            if (path as NSString).pathExtension == "app" {
+                let infoPath = ((path as NSString)
+                    .appendingPathComponent("Contents") as NSString)
                     .appendingPathComponent("Info.plist")
-                guard let data = fileManager.contents(atPath: infoURL.path),
+                guard let data = fileManager.contents(atPath: infoPath),
                       let plist = try? PropertyListSerialization.propertyList(from: data, format: nil) as? [String: Any]
                 else { return nil }
                 return plist["CFBundleShortVersionString"] as? String
             }
-            currentURL.deleteLastPathComponent()
+
+            let parent = (path as NSString).deletingLastPathComponent
+            if parent == path { break }
+            path = parent
         }
 
         return nil
