@@ -30,7 +30,7 @@ struct CodexBarApp: App {
         let gitCommit = Bundle.main.object(forInfoDictionaryKey: "CodexGitCommit") as? String ?? "unknown"
         let buildTimestamp = Bundle.main.object(forInfoDictionaryKey: "CodexBuildTimestamp") as? String ?? "unknown"
         CodexBarLog.logger(LogCategories.app).info(
-            "CodexBar starting",
+            "Burnbar starting",
             metadata: [
                 "version": version,
                 "build": build,
@@ -77,7 +77,7 @@ struct CodexBarApp: App {
     var body: some Scene {
         // Hidden 1×1 window to keep SwiftUI's lifecycle alive so `Settings` scene
         // shows the native toolbar tabs even though the UI is AppKit-based.
-        WindowGroup("CodexBarLifecycleKeepalive") {
+        WindowGroup("BurnbarLifecycleKeepalive") {
             HiddenWindowView()
         }
         .defaultSize(width: 20, height: 20)

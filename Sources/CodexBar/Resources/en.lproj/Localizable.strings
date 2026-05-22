@@ -1,4 +1,4 @@
-/* English localization for CodexBar (base/fallback) */
+/* English localization for Burnbar (base/fallback) */
 
 " providers" = " providers";
 "(System)" = "(System)";
@@ -37,7 +37,7 @@
 "Automatic imports browser cookies or stored sessions." = "Automatic imports browser cookies or stored sessions.";
 "Automatic imports browser cookies." = "Automatic imports browser cookies.";
 "Automatically imports browser session cookie." = "Automatically imports browser session cookie.";
-"Automatically opens CodexBar when you start your Mac." = "Automatically opens CodexBar when you start your Mac.";
+"Automatically opens the app when you start your Mac." = "Automatically opens the app when you start your Mac.";
 "Automation" = "Automation";
 "Average (\\(label1) + \\(label2))" = "Average (\\(label1) + \\(label2))";
 "Average (\\(metadata.sessionLabel) + \\(metadata.weeklyLabel))" = "Average (\\(metadata.sessionLabel) + \\(metadata.weeklyLabel))";
@@ -63,7 +63,7 @@
 "Choose up to \\(Self.maxOverviewProviders) providers" = "Choose up to \\(Self.maxOverviewProviders) providers";
 "Choose up to \\(count) providers" = "Choose up to \\(count) providers";
 "Choose what to show in the menu bar (Pace shows usage vs. expected)." = "Choose what to show in the menu bar (Pace shows usage vs. expected).";
-"Choose which Codex account CodexBar should follow." = "Choose which Codex account CodexBar should follow.";
+"Choose which account to follow." = "Choose which account to follow.";
 "Choose which window drives the menu bar percent." = "Choose which window drives the menu bar percent.";
 "Chrome" = "Chrome";
 "Claude CLI not found" = "Claude CLI not found";
@@ -78,9 +78,9 @@
 "Codex binary" = "Codex binary";
 "Codex login failed" = "Codex login failed";
 "Codex login timed out" = "Codex login timed out";
-"CodexBar Lifecycle Keepalive" = "CodexBar Lifecycle Keepalive";
-"CodexBar can't show its menu bar icon" = "CodexBar can't show its menu bar icon";
-"CodexBar could not read managed account storage. " = "CodexBar could not read managed account storage. ";
+"Burnbar Lifecycle Keepalive" = "Burnbar Lifecycle Keepalive";
+"App can't show its menu bar icon" = "App can't show its menu bar icon";
+"App could not read managed account storage. " = "App could not read managed account storage. ";
 "Configure…" = "Configure…";
 "Connected" = "Connected";
 "Controls how much detail is logged." = "Controls how much detail is logged.";
@@ -141,7 +141,7 @@
 "Hide details" = "Hide details";
 "Hide personal information" = "Hide personal information";
 "Historical tracking" = "Historical tracking";
-"How often CodexBar polls providers in the background." = "How often CodexBar polls providers in the background.";
+"How often the app polls providers in the background." = "How often the app polls providers in the background.";
 "Inactive" = "Inactive";
 "Install CLI" = "Install CLI";
 "Install the Claude CLI (npm i -g @anthropic-ai/claude-code) and try again." = "Install the Claude CLI (npm i -g @anthropic-ai/claude-code) and try again.";
@@ -200,7 +200,7 @@
 "Open" = "Open";
 "Open API Keys" = "Open API Keys";
 "Open Amp Settings" = "Open Amp Settings";
-"Open Antigravity to sign in, then refresh CodexBar." = "Open Antigravity to sign in, then refresh CodexBar.";
+"Open Antigravity to sign in, then refresh." = "Open Antigravity to sign in, then refresh.";
 "Open Browser" = "Open Browser";
 "Open Coding Plan" = "Open Coding Plan";
 "Open Console" = "Open Console";
@@ -244,7 +244,7 @@
 "Progress bars fill as you consume quota (instead of showing remaining)." = "Progress bars fill as you consume quota (instead of showing remaining).";
 "Provider" = "Provider";
 "Providers" = "Providers";
-"Quit CodexBar" = "Quit CodexBar";
+"Quit the app" = "Quit the app";
 "Random (default)" = "Random (default)";
 "Reads local usage logs. Shows today + last 30 days cost in the menu." = "Reads local usage logs. Shows today + the selected history window in the menu.";
 "Refresh" = "Refresh";
@@ -252,8 +252,8 @@
 "Remote" = "Remote";
 "Remove" = "Remove";
 "Remove Codex account?" = "Remove Codex account?";
-"Remove \\(account.email) from CodexBar? Its managed Codex home will be deleted." = "Remove \\(account.email) from CodexBar? Its managed Codex home will be deleted.";
-"Remove \\(email) from CodexBar? Its managed Codex home will be deleted." = "Remove \\(email) from CodexBar? Its managed Codex home will be deleted.";
+"Remove \\(account.email)? Their managed home will be deleted." = "Remove \\(account.email)? Their managed home will be deleted.";
+"Remove \\(email)? Their managed home will be deleted." = "Remove \\(email)? Their managed home will be deleted.";
 "Remove selected account" = "Remove selected account";
 "Replace critter bars with provider branding icons and a percentage." = "Replace critter bars with provider branding icons and a percentage.";
 "Replay selected animation" = "Replay selected animation";
@@ -293,7 +293,7 @@
 "Store multiple Ollama Cookie headers." = "Store multiple Ollama Cookie headers.";
 "Store multiple OpenCode Cookie headers." = "Store multiple OpenCode Cookie headers.";
 "Store multiple OpenCode Go Cookie headers." = "Store multiple OpenCode Go Cookie headers.";
-"Stored in the CodexBar config file." = "Stored in the CodexBar config file.";
+"Stored in the app config file." = "Stored in the app config file.";
 "Stored in ~/.burnbar/config.json. " = "Stored in ~/.burnbar/config.json. ";
 "Stored in ~/.burnbar/config.json. Generate one at kimi-k2.ai." = "Stored in ~/.burnbar/config.json. Generate one at kimi-k2.ai.";
 "Stored in ~/.burnbar/config.json. Paste the key from the Synthetic dashboard." = "Stored in ~/.burnbar/config.json. Paste the key from the Synthetic dashboard.";
@@ -304,7 +304,7 @@
 "Subscription Utilization" = "Subscription Utilization";
 "Surprise me" = "Surprise me";
 "Switcher shows icons" = "Switcher shows icons";
-"Symlink CodexBarCLI to /usr/local/bin and /opt/homebrew/bin as codexbar." = "Symlink CodexBarCLI to /usr/local/bin and /opt/homebrew/bin as codexbar.";
+"Symlink CLI to /usr/local/bin and /opt/homebrew/bin as burnbar." = "Symlink CLI to /usr/local/bin and /opt/homebrew/bin as burnbar.";
 "System" = "System";
 "Temporarily shows the loading animation after the next refresh." = "Temporarily shows the loading animation after the next refresh.";
 "Tertiary (\\(label))" = "Tertiary (\\(label))";
@@ -368,8 +368,8 @@
 "cursor_on_demand" = "On-demand: %@";
 "cursor_on_demand_with_limit" = "On-demand: %1$@ / %2$@";
 "extra_usage_format" = "Extra usage: %1$@ / %2$@";
-"jetbrains_detected_generate" = "Detected: %@. Use the AI assistant once to generate quota data, then refresh CodexBar.";
-"jetbrains_detected_select" = "Detected: %@. Select your preferred IDE in Settings, then refresh CodexBar.";
+"jetbrains_detected_generate" = "Detected: %@. Use the AI assistant once to generate quota data, then refresh.";
+"jetbrains_detected_select" = "Detected: %@. Select your preferred IDE in Settings, then refresh.";
 "last_fetch_failed_with_provider" = "Last %@ fetch failed:";
 "last_spend" = "Last spend: %@";
 "mcp_model_usage" = "%1$@: %2$@";
@@ -379,10 +379,10 @@
 "metric_primary" = "Primary (%@)";
 "metric_secondary" = "Secondary (%@)";
 "metric_tertiary" = "Tertiary (%@)";
-"multiple_workspaces_found" = "CodexBar found multiple workspaces for %@. Please choose the workspace to add.";
+"multiple_workspaces_found" = "App found multiple workspaces for %@. Please choose the workspace to add.";
 "ory_session_…=…; csrftoken=…" = "ory_session_…=…; csrftoken=…";
 "overview_choose_providers" = "Choose up to %@ providers";
-"remove_account_message" = "Remove %@ from CodexBar? Its managed Codex home will be deleted.";
+"remove_account_message" = "Remove %@? Their managed home will be deleted.";
 "version_format" = "Version %@";
 "vertex_ai_login_instructions" = "To track Vertex AI usage, authenticate with Google Cloud.\n\n1. Open Terminal\n2. Run: gcloud auth application-default login\n3. Follow the browser prompts to sign in\n4. Set your project: gcloud config set project PROJECT_ID\n\nOpen Terminal now?";
 "workspaceID is set but only opencode, opencodego, and deepgram support workspaceID." = "workspaceID is set but only opencode, opencodego, and deepgram support workspaceID.";
@@ -401,13 +401,13 @@
 "language_chinese_simplified" = "简体中文";
 "language_portuguese_brazilian" = "Português (Brasil)";
 "start_at_login_title" = "Start at Login";
-"start_at_login_subtitle" = "Automatically opens CodexBar when you start your Mac.";
+"start_at_login_subtitle" = "Automatically opens the app when you start your Mac.";
 "show_cost_summary" = "Show cost summary";
 "show_cost_summary_subtitle" = "Reads local usage logs. Shows today + the selected history window in the menu.";
 "cost_history_days_title" = "History window: %d days";
 "cost_auto_refresh_info" = "Auto-refresh: hourly · Timeout: 10m";
 "refresh_cadence_title" = "Refresh cadence";
-"refresh_cadence_subtitle" = "How often CodexBar polls providers in the background.";
+"refresh_cadence_subtitle" = "How often the app polls providers in the background.";
 "manual_refresh_hint" = "Auto-refresh is off; use the menu's Refresh command.";
 "check_provider_status_title" = "Check provider status";
 "check_provider_status_subtitle" = "Polls OpenAI/Claude status pages and Google Workspace for Gemini/Antigravity, surfacing incidents in the icon and menu.";
@@ -433,7 +433,7 @@
 "quota_warning_upper" = "Upper";
 "quota_warning_lower" = "Lower";
 "apply" = "Apply";
-"quit_app" = "Quit CodexBar";
+"quit_app" = "Quit the app";
 
 /* Tab titles */
 "tab_general" = "General";
@@ -454,8 +454,8 @@
 "managed_login_already_running" = "A managed Codex login is already running. Wait for it to finish before adding or re-authenticating another account.";
 "managed_login_failed" = "Managed Codex login did not complete. Verify that `codex --version` works in Terminal. If macOS blocked or moved `codex` to Trash, remove stale duplicate installs, run `npm install -g --include=optional @openai/codex@latest`, then try again.";
 "managed_login_missing_email" = "Codex login completed, but no account email was available. Try again after confirming the account is fully signed in.";
-"workspace_selection_cancelled" = "CodexBar found multiple workspaces, but no workspace was selected.";
-"unsafe_managed_home" = "CodexBar refused to modify an unexpected managed home path: %@";
+"workspace_selection_cancelled" = "App found multiple workspaces, but no workspace was selected.";
+"unsafe_managed_home" = "App refused to modify an unexpected managed home path: %@";
 "menu_bar_metric_title" = "Menu bar metric";
 "menu_bar_metric_subtitle" = "Choose which window drives the menu bar percent.";
 "menu_bar_metric_subtitle_deepseek" = "Shows the DeepSeek balance in the menu bar.";
@@ -506,8 +506,8 @@
 "open_menu_shortcut_title" = "Open menu";
 "open_menu_shortcut_subtitle" = "Trigger the menu bar menu from anywhere.";
 "install_cli" = "Install CLI";
-"install_cli_subtitle" = "Symlink CodexBarCLI to /usr/local/bin and /opt/homebrew/bin as codexbar.";
-"cli_not_found" = "CodexBarCLI not found in app bundle.";
+"install_cli_subtitle" = "Symlink CLI to /usr/local/bin and /opt/homebrew/bin as burnbar.";
+"cli_not_found" = "CLI not found in app bundle.";
 "no_writable_bin_dirs" = "No writable bin dirs found.";
 "show_debug_settings_title" = "Show Debug Settings";
 "show_debug_settings_subtitle" = "Expose troubleshooting tools in the Debug tab.";
@@ -592,7 +592,7 @@
 "login_shell_path" = "Login shell PATH (startup capture)";
 "cleared" = "Cleared.";
 "no_fetch_attempts" = "No fetch attempts yet.";
-"macOS Tahoe can block menu bar apps in System Settings → Menu Bar → Allow in the Menu Bar. CodexBar is running, but macOS may be hiding its icon. Open Menu Bar settings and turn CodexBar on." = "macOS Tahoe can block menu bar apps in System Settings → Menu Bar → Allow in the Menu Bar. CodexBar is running, but macOS may be hiding its icon. Open Menu Bar settings and turn CodexBar on.";
+"macOS Tahoe can block menu bar apps in System Settings → Menu Bar → Allow in the Menu Bar. The app is running, but macOS may be hiding its icon. Open Menu Bar settings and turn it on." = "macOS Tahoe can block menu bar apps in System Settings → Menu Bar → Allow in the Menu Bar. The app is running, but macOS may be hiding its icon. Open Menu Bar settings and turn it on.";
 
 /* Metric preferences */
 "metric_pref_automatic" = "Automatic";

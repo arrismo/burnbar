@@ -178,7 +178,7 @@ extension StatusItemController: StatusItemMenuPersistentActionDelegate {
         guard self.settings.hasUnreadableManagedCodexAccountStore == false else {
             self.presentLoginAlert(
                 title: "Managed Codex accounts unavailable",
-                message: "CodexBar could not read managed account storage. " +
+                message: "Could not read managed account storage. " +
                     "Recover the store before adding another account.")
             return
         }
@@ -388,9 +388,9 @@ extension StatusItemController: StatusItemMenuPersistentActionDelegate {
                 "Codex login completed, but no account email was available. " +
                     "Try again after confirming the account is fully signed in."
             case .workspaceSelectionCancelled:
-                "CodexBar found multiple workspaces, but no workspace was selected."
+                "App found multiple workspaces, but no workspace was selected."
             case let .unsafeManagedHome(path):
-                "CodexBar refused to modify an unexpected managed home path: \(path)"
+                "App refused to modify an unexpected managed home path: \(path)"
             }
             info = LoginAlertInfo(title: "Could not add Codex account", message: message)
         } else {

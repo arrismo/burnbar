@@ -8,7 +8,7 @@ private func appLanguageDefaults() -> UserDefaults {
         return .standard
     }
     // Fallback for running outside a .app bundle (swift run / debug builds)
-    return UserDefaults(suiteName: "CodexBar") ?? .standard
+    return UserDefaults(suiteName: "Burnbar") ?? .standard
 }
 
 func codexBarLocalizationResourceBundle(

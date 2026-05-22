@@ -18,7 +18,7 @@ struct HiddenWindowView: View {
                 }.value
             }
             .onAppear {
-                if let window = NSApp.windows.first(where: { $0.title == "CodexBarLifecycleKeepalive" }) {
+                if let window = NSApp.windows.first(where: { $0.title == "BurnbarLifecycleKeepalive" }) {
                     // Make the keepalive window truly invisible and non-interactive.
                     window.styleMask = [.borderless]
                     window.collectionBehavior = [.auxiliary, .ignoresCycle, .transient, .canJoinAllSpaces]

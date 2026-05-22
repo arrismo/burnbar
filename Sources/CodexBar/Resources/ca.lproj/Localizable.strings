@@ -1,4 +1,4 @@
-/* Catalan localization for CodexBar */
+/* Catalan localization for Burnbar */
 
 " providers" = " proveïdors";
 "(System)" = "(Sistema)";
@@ -37,7 +37,7 @@
 "Automatic imports browser cookies or stored sessions." = "El mode automàtic importa galetes del navegador o sessions desades.";
 "Automatic imports browser cookies." = "El mode automàtic importa galetes del navegador.";
 "Automatically imports browser session cookie." = "Importa automàticament la galeta de sessió del navegador.";
-"Automatically opens CodexBar when you start your Mac." = "Obre el CodexBar automàticament en iniciar el Mac.";
+"Obre el aplicativo automàticament en iniciar el Mac." = "Obre el aplicativo automàticament en iniciar el Mac.";
 "Automation" = "Automatització";
 "Average (\\(label1) + \\(label2))" = "Mitjana (\\(label1) + \\(label2))";
 "Average (\\(metadata.sessionLabel) + \\(metadata.weeklyLabel))" = "Mitjana (\\(metadata.sessionLabel) + \\(metadata.weeklyLabel))";
@@ -63,7 +63,7 @@
 "Choose up to \\(Self.maxOverviewProviders) providers" = "Tria fins a \\(Self.maxOverviewProviders) proveïdors";
 "Choose up to \\(count) providers" = "Tria fins a \\(count) proveïdors";
 "Choose what to show in the menu bar (Pace shows usage vs. expected)." = "Tria què es mostra a la barra de menús (Ritme mostra l'ús respecte al previst).";
-"Choose which Codex account CodexBar should follow." = "Tria quin compte de Codex ha de seguir el CodexBar.";
+"Tria quin compte de Codex ha de seguir el aplicativo." = "Tria quin compte de Codex ha de seguir el aplicativo.";
 "Choose which window drives the menu bar percent." = "Tria quina finestra determina el percentatge de la barra de menús.";
 "Chrome" = "Chrome";
 "Claude CLI not found" = "No s'ha trobat la CLI de Claude";
@@ -78,9 +78,9 @@
 "Codex binary" = "Binari de Codex";
 "Codex login failed" = "L'inici de sessió de Codex ha fallat";
 "Codex login timed out" = "L'inici de sessió de Codex ha esgotat el temps d'espera";
-"CodexBar Lifecycle Keepalive" = "Manteniment del cicle de vida del CodexBar";
-"CodexBar can't show its menu bar icon" = "El CodexBar no pot mostrar la seva icona a la barra de menús";
-"CodexBar could not read managed account storage. " = "El CodexBar no ha pogut llegir l'emmagatzematge de comptes gestionats. ";
+"Manteniment del cicle de vida del aplicativo" = "Manteniment del cicle de vida del aplicativo";
+"El aplicativo no pot mostrar la seva icona a la barra de menús" = "El aplicativo no pot mostrar la seva icona a la barra de menús";
+"App could not read managed account storage. " = "El aplicativo no ha pogut llegir l'emmagatzematge de comptes gestionats. ";
 "Configure…" = "Configura…";
 "Connected" = "Connectat";
 "Controls how much detail is logged." = "Controla quant detall es registra.";
@@ -141,7 +141,7 @@
 "Hide details" = "Amaga els detalls";
 "Hide personal information" = "Amaga la informació personal";
 "Historical tracking" = "Seguiment històric";
-"How often CodexBar polls providers in the background." = "Amb quina freqüència el CodexBar consulta els proveïdors en segon pla.";
+"Amb quina freqiència el aplicativo consulta els proveïdors en segon pla." = "Amb quina freqüència el aplicativo consulta els proveïdors en segon pla.";
 "Inactive" = "Inactiu";
 "Install CLI" = "Instal·la la CLI";
 "Install the Claude CLI (npm i -g @anthropic-ai/claude-code) and try again." = "Instal·la la CLI de Claude (npm i -g @anthropic-ai/claude-code) i torna-ho a provar.";
@@ -200,7 +200,7 @@
 "Open" = "Obre";
 "Open API Keys" = "Obre les claus d'API";
 "Open Amp Settings" = "Obre la configuració d'Amp";
-"Open Antigravity to sign in, then refresh CodexBar." = "Obre Antigravity per iniciar la sessió i després actualitza el CodexBar.";
+"Obre Antigravity per iniciar la sessió i després actualitza." = "Obre Antigravity per iniciar la sessió i després actualitza el aplicativo.";
 "Open Browser" = "Obre el navegador";
 "Open Coding Plan" = "Obre el pla de programació";
 "Open Console" = "Obre la Consola";
@@ -244,7 +244,7 @@
 "Progress bars fill as you consume quota (instead of showing remaining)." = "Les barres de progrés s'omplen a mesura que consumeixes la quota (en comptes de mostrar el que queda).";
 "Provider" = "Proveïdor";
 "Providers" = "Proveïdors";
-"Quit CodexBar" = "Surt del CodexBar";
+"Surt del aplicativo" = "Surt del aplicativo";
 "Random (default)" = "Aleatori (per defecte)";
 "Reads local usage logs. Shows today + last 30 days cost in the menu." = "Llegeix els registres d'ús locals. Mostra el cost d'avui + la finestra d'historial seleccionada al menú.";
 "Refresh" = "Actualitza";
@@ -252,8 +252,8 @@
 "Remote" = "Remot";
 "Remove" = "Elimina";
 "Remove Codex account?" = "Vols eliminar el compte de Codex?";
-"Remove \\(account.email) from CodexBar? Its managed Codex home will be deleted." = "Vols eliminar \\(account.email) del CodexBar? El seu directori Codex gestionat s'esborrarà.";
-"Remove \\(email) from CodexBar? Its managed Codex home will be deleted." = "Vols eliminar \\(email) del CodexBar? El seu directori Codex gestionat s'esborrarà.";
+"Remove \\(account.email) from Burnbar? Its managed Codex home will be deleted." = "Vols eliminar \\(account.email) del aplicativo? El seu directori Codex gestionat s'esborrarà.";
+"Remove \\(email) from Burnbar? Its managed Codex home will be deleted." = "Vols eliminar \\(email) del aplicativo? El seu directori Codex gestionat s'esborrarà.";
 "Remove selected account" = "Elimina el compte seleccionat";
 "Replace critter bars with provider branding icons and a percentage." = "Substitueix les barres de bestioles per icones de marca del proveïdor i un percentatge.";
 "Replay selected animation" = "Reprodueix l'animació seleccionada";
@@ -293,7 +293,7 @@
 "Store multiple Ollama Cookie headers." = "Desa diverses capçaleres Cookie d'Ollama.";
 "Store multiple OpenCode Cookie headers." = "Desa diverses capçaleres Cookie d'OpenCode.";
 "Store multiple OpenCode Go Cookie headers." = "Desa diverses capçaleres Cookie d'OpenCode Go.";
-"Stored in the CodexBar config file." = "Desat al fitxer de configuració del CodexBar.";
+"Desat al fitxer de configuració del aplicativo." = "Desat al fitxer de configuració del aplicativo.";
 "Stored in ~/.burnbar/config.json. " = "Desat a ~/.burnbar/config.json. ";
 "Stored in ~/.burnbar/config.json. Generate one at kimi-k2.ai." = "Desat a ~/.burnbar/config.json. Genera'n una a kimi-k2.ai.";
 "Stored in ~/.burnbar/config.json. Paste the key from the Synthetic dashboard." = "Desat a ~/.burnbar/config.json. Enganxa la clau del tauler de Synthetic.";
@@ -304,7 +304,7 @@
 "Subscription Utilization" = "Ús de la subscripció";
 "Surprise me" = "Sorprèn-me";
 "Switcher shows icons" = "El selector mostra icones";
-"Symlink CodexBarCLI to /usr/local/bin and /opt/homebrew/bin as codexbar." = "Crea un enllaç simbòlic de CodexBarCLI a /usr/local/bin i /opt/homebrew/bin com a codexbar.";
+"Crea un enllaç simbòlic de CLI a /usr/local/bin i /opt/homebrew/bin com a burnbar." = "Crea un enllaç simbòlic de la aplicaciónCLI a /usr/local/bin i /opt/homebrew/bin com a burnbar.";
 "System" = "Sistema";
 "Temporarily shows the loading animation after the next refresh." = "Mostra temporalment l'animació de càrrega després de la propera actualització.";
 "Tertiary (\\(label))" = "Terciari (\\(label))";
@@ -368,8 +368,8 @@
 "cursor_on_demand" = "Sota demanda: %@";
 "cursor_on_demand_with_limit" = "Sota demanda: %1$@ / %2$@";
 "extra_usage_format" = "Ús addicional: %1$@ / %2$@";
-"jetbrains_detected_generate" = "Detectat: %@. Fes servir l'assistent d'IA una vegada per generar dades de quota i després actualitza el CodexBar.";
-"jetbrains_detected_select" = "Detectat: %@. Selecciona el teu IDE preferit a la configuració i després actualitza el CodexBar.";
+"jetbrains_detected_generate" = "Detectat: %@. Fes servir l'assistent d'IA una vegada per generar dades de quota i després actualitza.";
+"jetbrains_detected_select" = "Detectat: %@. Selecciona el teu IDE preferit a la configuració i després actualitza.";
 "last_fetch_failed_with_provider" = "L'última obtenció de %@ ha fallat:";
 "last_spend" = "Última despesa: %@";
 "mcp_model_usage" = "%1$@: %2$@";
@@ -379,10 +379,10 @@
 "metric_primary" = "Principal (%@)";
 "metric_secondary" = "Secundari (%@)";
 "metric_tertiary" = "Terciari (%@)";
-"multiple_workspaces_found" = "El CodexBar ha trobat diversos espais de treball per a %@. Tria l'espai de treball que vols afegir.";
+"multiple_workspaces_found" = "El aplicativo ha trobat diversos espais de treball per a %@. Tria l'espai de treball que vols afegir.";
 "ory_session_…=…; csrftoken=…" = "ory_session_…=…; csrftoken=…";
 "overview_choose_providers" = "Tria fins a %@ proveïdors";
-"remove_account_message" = "Vols eliminar %@ del CodexBar? El seu directori Codex gestionat s'esborrarà.";
+"remove_account_message" = "Vols eliminar %@? El seu directori gestionat s'esborrarà.";
 "version_format" = "Versió %@";
 "vertex_ai_login_instructions" = "Per fer un seguiment de l'ús de Vertex AI, autentica't amb Google Cloud.\n\n1. Obre el Terminal\n2. Executa: gcloud auth application-default login\n3. Segueix les indicacions del navegador per iniciar la sessió\n4. Defineix el teu projecte: gcloud config set project PROJECT_ID\n\nVols obrir el Terminal ara?";
 "workspaceID is set but only opencode, opencodego, and deepgram support workspaceID." = "workspaceID està definit, però només opencode, opencodego i deepgram admeten workspaceID.";
@@ -401,13 +401,13 @@
 "language_chinese_simplified" = "简体中文";
 "language_portuguese_brazilian" = "Português (Brasil)";
 "start_at_login_title" = "Obrir en iniciar la sessió";
-"start_at_login_subtitle" = "Obre el CodexBar automàticament en iniciar el Mac.";
+"start_at_login_subtitle" = "Obre el aplicativo automàticament en iniciar el Mac.";
 "show_cost_summary" = "Mostra el resum de cost";
 "show_cost_summary_subtitle" = "Llegeix els registres d'ús locals. Mostra el cost d'avui + la finestra d'historial seleccionada al menú.";
 "cost_history_days_title" = "Finestra d'historial: %d dies";
 "cost_auto_refresh_info" = "Actualització automàtica: cada hora · Temps d'espera: 10 m";
 "refresh_cadence_title" = "Freqüència d'actualització";
-"refresh_cadence_subtitle" = "Amb quina freqüència el CodexBar consulta els proveïdors en segon pla.";
+"refresh_cadence_subtitle" = "Amb quina freqüència el aplicativo consulta els proveïdors en segon pla.";
 "manual_refresh_hint" = "L'actualització automàtica està desactivada; fes servir l'ordre Actualitza del menú.";
 "check_provider_status_title" = "Comprova l'estat del proveïdor";
 "check_provider_status_subtitle" = "Consulta les pàgines d'estat d'OpenAI/Claude i Google Workspace per a Gemini/Antigravity, mostrant incidències a la icona i al menú.";
@@ -433,7 +433,7 @@
 "quota_warning_upper" = "Superior";
 "quota_warning_lower" = "Inferior";
 "apply" = "Aplica";
-"quit_app" = "Surt del CodexBar";
+"quit_app" = "Surt del aplicativo";
 
 /* Tab titles */
 "tab_general" = "General";
@@ -454,8 +454,8 @@
 "managed_login_already_running" = "Ja hi ha un inici de sessió gestionat de Codex en curs. Espera que acabi abans d'afegir o reautenticar un altre compte.";
 "managed_login_failed" = "L'inici de sessió gestionat de Codex no s'ha completat. Comprova que `codex --version` funciona al Terminal. Si macOS ha bloquejat o ha mogut `codex` a la Paperera, elimina les instal·lacions duplicades obsoletes, executa `npm install -g --include=optional @openai/codex@latest` i torna-ho a provar.";
 "managed_login_missing_email" = "L'inici de sessió de Codex s'ha completat, però no hi havia cap correu de compte disponible. Torna-ho a provar després de confirmar que el compte té la sessió totalment iniciada.";
-"workspace_selection_cancelled" = "El CodexBar ha trobat diversos espais de treball, però no se n'ha seleccionat cap.";
-"unsafe_managed_home" = "El CodexBar s'ha negat a modificar un camí de directori gestionat inesperat: %@";
+"workspace_selection_cancelled" = "El aplicativo ha trobat diversos espais de treball, però no se n'ha seleccionat cap.";
+"unsafe_managed_home" = "El aplicativo s'ha negat a modificar un camí de directori gestionat inesperat: %@";
 "menu_bar_metric_title" = "Mètrica de la barra de menús";
 "menu_bar_metric_subtitle" = "Tria quina finestra determina el percentatge de la barra de menús.";
 "menu_bar_metric_subtitle_deepseek" = "Mostra el saldo de DeepSeek a la barra de menús.";
@@ -506,8 +506,8 @@
 "open_menu_shortcut_title" = "Obre el menú";
 "open_menu_shortcut_subtitle" = "Obre el menú de la barra de menús des de qualsevol lloc.";
 "install_cli" = "Instal·la la CLI";
-"install_cli_subtitle" = "Crea un enllaç simbòlic de CodexBarCLI a /usr/local/bin i /opt/homebrew/bin com a codexbar.";
-"cli_not_found" = "No s'ha trobat CodexBarCLI al paquet de l'app.";
+"install_cli_subtitle" = "Crea un enllaç simbòlic de CLI a /usr/local/bin i /opt/homebrew/bin com a burnbar.";
+"cli_not_found" = "No s'ha trobat CLI al paquet de l'app.";
 "no_writable_bin_dirs" = "No s'han trobat directoris bin amb permís d'escriptura.";
 "show_debug_settings_title" = "Mostra la configuració de depuració";
 "show_debug_settings_subtitle" = "Mostra eines de diagnòstic a la pestanya Depuració.";
@@ -592,7 +592,7 @@
 "login_shell_path" = "PATH del shell d'inici de sessió (captura a l'arrencada)";
 "cleared" = "Esborrat.";
 "no_fetch_attempts" = "Encara no hi ha intents d'obtenció.";
-"macOS Tahoe can block menu bar apps in System Settings → Menu Bar → Allow in the Menu Bar. CodexBar is running, but macOS may be hiding its icon. Open Menu Bar settings and turn CodexBar on." = "macOS Tahoe pot bloquejar les apps de la barra de menús a Configuració del Sistema → Barra de menús → Permet a la barra de menús. El CodexBar s'està executant, però macOS podria estar amagant-ne la icona. Obre la configuració de la barra de menús i activa el CodexBar.";
+"macOS Tahoe can block menu bar apps in System Settings → Menu Bar → Allow in the Menu Bar. Burnbar is running, but macOS may be hiding its icon. Open Menu Bar settings and turn Burnbar on." = "macOS Tahoe pot bloquejar les apps de la barra de menús a Configuració del Sistema → Barra de menús → Permet a la barra de menús. El aplicativo s'està executant, però macOS podria estar amagant-ne la icona. Obre la configuració de la barra de menús i activa el aplicativo.";
 
 /* Metric preferences */
 "metric_pref_automatic" = "Automàtic";

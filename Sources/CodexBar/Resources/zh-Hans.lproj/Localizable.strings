@@ -1,4 +1,4 @@
-/* Chinese (Simplified) localization for CodexBar */
+/* Chinese (Simplified) localization for Burnbar */
 
 " providers" = "";
 "(System)" = "";
@@ -40,7 +40,7 @@
 "Automatic imports browser cookies or stored sessions." = "";
 "Automatic imports browser cookies." = "";
 "Automatically imports browser session cookie." = "";
-"Automatically opens CodexBar when you start your Mac." = "";
+"启动 Mac 时自动打开应用。" = "";
 "Automation" = "";
 "Average (\\(label1) + \\(label2))" = "";
 "Average (\\(metadata.sessionLabel) + \\(metadata.weeklyLabel))" = "";
@@ -66,7 +66,7 @@
 "Choose up to \\(Self.maxOverviewProviders) providers" = "";
 "Choose up to \\(count) providers" = "";
 "Choose what to show in the menu bar (Pace shows usage vs. expected)." = "";
-"Choose which Codex account CodexBar should follow." = "";
+"选择要跟随的 Codex 账户。" = "";
 "Choose which window drives the menu bar percent." = "";
 "Chrome" = "";
 "Claude CLI not found" = "";
@@ -81,8 +81,8 @@
 "Codex binary" = "";
 "Codex login failed" = "";
 "Codex login timed out" = "";
-"CodexBar Lifecycle Keepalive" = "";
-"CodexBar could not read managed account storage. " = "";
+"Burnbar 生命周期保活" = "";
+"应用无法读取托管账户存储。 " = "";
 "Configure…" = "";
 "Connected" = "";
 "Controls how much detail is logged." = "";
@@ -143,7 +143,7 @@
 "Hide details" = "隐藏详情";
 "Hide personal information" = "";
 "Historical tracking" = "";
-"How often CodexBar polls providers in the background." = "";
+"应用在后台轮询提供商的频率。" = "";
 "Inactive" = "";
 "Install CLI" = "";
 "Install the Claude CLI (npm i -g @anthropic-ai/claude-code) and try again." = "";
@@ -205,7 +205,7 @@
 "Open" = "";
 "Open API Keys" = "";
 "Open Amp Settings" = "";
-"Open Antigravity to sign in, then refresh CodexBar." = "";
+"打开 Antigravity 登录，然后刷新应用。" = "";
 "Open Browser" = "打开浏览器";
 "Open Coding Plan" = "";
 "Open Console" = "";
@@ -248,7 +248,7 @@
 "Progress bars fill as you consume quota (instead of showing remaining)." = "";
 "Provider" = "";
 "Providers" = "";
-"Quit CodexBar" = "";
+"退出应用" = "";
 "Random (default)" = "";
 "Reads local usage logs. Shows today + last 30 days cost in the menu." = "";
 "Refresh" = "";
@@ -257,8 +257,8 @@
 "Remote" = "";
 "Remove" = "";
 "Remove Codex account?" = "";
-"Remove \\(account.email) from CodexBar? Its managed Codex home will be deleted." = "";
-"Remove \\(email) from CodexBar? Its managed Codex home will be deleted." = "";
+"Remove \\(account.email)? Their managed home will be deleted." = "";
+"Remove \\(email)? Their managed home will be deleted." = "";
 "Remove selected account" = "";
 "Replace critter bars with provider branding icons and a percentage." = "";
 "Replay selected animation" = "";
@@ -301,7 +301,7 @@
 "Store multiple Ollama Cookie headers." = "";
 "Store multiple OpenCode Cookie headers." = "";
 "Store multiple OpenCode Go Cookie headers." = "";
-"Stored in the CodexBar config file." = "";
+"存储在应用配置文件中。" = "";
 "Stored in ~/.burnbar/config.json. " = "";
 "Stored in ~/.burnbar/config.json. Generate one at kimi-k2.ai." = "";
 "Stored in ~/.burnbar/config.json. Paste the key from the Synthetic dashboard." = "";
@@ -312,7 +312,7 @@
 "Subscription Utilization" = "";
 "Surprise me" = "给我惊喜";
 "Switcher shows icons" = "";
-"Symlink CodexBarCLI to /usr/local/bin and /opt/homebrew/bin as codexbar." = "";
+"将 CLI 符号链接到 /usr/local/bin 和 /opt/homebrew/bin 作为 burnbar。" = "";
 "System" = "";
 "Temporarily shows the loading animation after the next refresh." = "";
 "Tertiary (\\(label))" = "";
@@ -382,8 +382,8 @@
 "cursor_on_demand" = "按需计费：%@";
 "cursor_on_demand_with_limit" = "按需计费：%1$@ / %2$@";
 "extra_usage_format" = "额外用量：%1$@ / %2$@";
-"jetbrains_detected_generate" = "检测到：%@。使用一次 AI 助手以生成配额数据，然后刷新 CodexBar。";
-"jetbrains_detected_select" = "检测到：%@。在设置中选择您偏好的 IDE，然后刷新 CodexBar。";
+"jetbrains_detected_generate" = "检测到：%@。使用一次 AI 助手以生成配额数据，然后刷新应用。";
+"jetbrains_detected_select" = "检测到：%@。在设置中选择您偏好的 IDE，然后刷新应用。";
 "last_fetch_failed_with_provider" = "上次获取 %1$@ 失败：";
 "last_spend" = "上次消耗：%@";
 "mcp_model_usage" = "%1$@：%2$@";
@@ -393,10 +393,10 @@
 "metric_primary" = "主要（%@）";
 "metric_secondary" = "次要（%@）";
 "metric_tertiary" = "第三（%@）";
-"multiple_workspaces_found" = "CodexBar 发现了 %1$@ 的多个工作区。请选择要添加的工作区。";
+"multiple_workspaces_found" = "应用发现了 %1$@ 的多个工作区。请选择要添加的工作区。";
 "ory_session_…=…; csrftoken=…" = "";
 "overview_choose_providers" = "选择最多 %1$@ 个提供商";
-"remove_account_message" = "从 CodexBar 中移除 %@？其托管的 Codex 主目录将被删除。";
+"remove_account_message" = "从应用中移除 %@？其托管的主目录将被删除。";
 "version_format" = "版本 %@";
 "vertex_ai_login_instructions" = "要使用 Vertex AI 跟踪，您需要通过 Google Cloud 进行认证。
 
@@ -422,13 +422,13 @@
 "language_chinese_simplified" = "简体中文";
 "language_portuguese_brazilian" = "Português (Brasil)";
 "start_at_login_title" = "开机启动";
-"start_at_login_subtitle" = "启动 Mac 时自动打开 CodexBar。";
+"start_at_login_subtitle" = "启动 Mac 时自动打开应用。";
 "show_cost_summary" = "显示费用摘要";
 "show_cost_summary_subtitle" = "读取本地使用日志。在菜单中显示今天及所选历史窗口的费用。";
 "cost_history_days_title" = "历史窗口：%d 天";
 "cost_auto_refresh_info" = "自动刷新：每小时 · 超时：10分钟";
 "refresh_cadence_title" = "刷新频率";
-"refresh_cadence_subtitle" = "CodexBar 在后台轮询提供商的频率。";
+"refresh_cadence_subtitle" = "应用在后台轮询提供商的频率。";
 "manual_refresh_hint" = "自动刷新已关闭；请使用菜单中的刷新命令。";
 "check_provider_status_title" = "检查提供商状态";
 "check_provider_status_subtitle" = "轮询 OpenAI/Claude 状态页面和 Google Workspace 的 Gemini/Antigravity，在图标和菜单中显示故障信息。";
@@ -454,7 +454,7 @@
 "quota_warning_upper" = "上限";
 "quota_warning_lower" = "下限";
 "apply" = "应用";
-"quit_app" = "退出 CodexBar";
+"quit_app" = "退出应用";
 
 /* Tab titles */
 "tab_general" = "通用";
@@ -475,8 +475,8 @@
 "managed_login_already_running" = "托管 Codex 登录已在运行。请等待完成后再添加或重新认证其他账户。";
 "managed_login_failed" = "托管 Codex 登录未完成。请先在终端确认 `codex --version` 可以运行。如果 macOS 阻止了 `codex` 或将它移到废纸篓，请移除旧的重复安装，运行 `npm install -g --include=optional @openai/codex@latest`，然后重试。";
 "managed_login_missing_email" = "Codex 登录已完成，但无法获取账户邮箱。请在确认账户已完全登录后重试。";
-"workspace_selection_cancelled" = "CodexBar 发现多个工作区，但未选择任何工作区。";
-"unsafe_managed_home" = "CodexBar 拒绝修改意外的托管主目录路径：%@";
+"workspace_selection_cancelled" = "应用发现多个工作区，但未选择任何工作区。";
+"unsafe_managed_home" = "应用拒绝修改意外的托管主目录路径：%@";
 "menu_bar_metric_title" = "菜单栏指标";
 "menu_bar_metric_subtitle" = "选择哪个窗口驱动菜单栏百分比。";
 "menu_bar_metric_subtitle_deepseek" = "在菜单栏显示 DeepSeek 余额。";
@@ -527,8 +527,8 @@
 "open_menu_shortcut_title" = "打开菜单";
 "open_menu_shortcut_subtitle" = "从任意位置触发菜单栏菜单。";
 "install_cli" = "安装 CLI";
-"install_cli_subtitle" = "将 CodexBarCLI 符号链接到 /usr/local/bin 和 /opt/homebrew/bin 作为 codexbar。";
-"cli_not_found" = "在应用包中未找到 CodexBarCLI。";
+"install_cli_subtitle" = "将 CLI 符号链接到 /usr/local/bin 和 /opt/homebrew/bin 作为 burnbar。";
+"cli_not_found" = "在应用包中未找到 CLI。";
 "no_writable_bin_dirs" = "未找到可写的 bin 目录。";
 "show_debug_settings_title" = "显示调试设置";
 "show_debug_settings_subtitle" = "在调试标签中显示故障排除工具。";
@@ -605,7 +605,7 @@
 "set_cost_error" = "设置费用错误";
 "clear_cost_error" = "清除费用错误";
 "section_cli_paths" = "CLI 路径";
-"cli_paths_caption" = "解析的 Codex 二进制文件和 PATH 层；启动时登录 PATH 捕获（短超时）。";
+"cli_paths_caption" = "解析的二进制文件和 PATH 层；启动时登录 PATH 捕获（短超时）。";
 "codex_binary" = "Codex 二进制文件";
 "claude_binary" = "Claude 二进制文件";
 "effective_path" = "有效 PATH";
@@ -648,10 +648,10 @@
 
 /* Additional keys */
 "not_found" = "未找到";
-"CodexBar can't show its menu bar icon" = "CodexBar 无法显示菜单栏图标";
+"应用无法显示菜单栏图标" = "应用无法显示菜单栏图标";
 "Dismiss" = "关闭";
 "Open Menu Bar Settings" = "打开菜单栏设置";
-"macOS Tahoe can block menu bar apps in System Settings → Menu Bar → Allow in the Menu Bar. CodexBar is running, but macOS may be hiding its icon. Open Menu Bar settings and turn CodexBar on." = "macOS Tahoe 可能会在“系统设置”→“菜单栏”→“允许显示在菜单栏”中阻止菜单栏应用。CodexBar 正在运行，但 macOS 可能隐藏了它的图标。打开菜单栏设置并启用 CodexBar。";
+"macOS Tahoe can block menu bar apps in System Settings → Menu Bar → Allow in the Menu Bar. The app is running, but macOS may be hiding its icon. Open Menu Bar settings and turn it on." = "macOS Tahoe 可能会在“系统设置”→“菜单栏”→“允许显示在菜单栏”中阻止菜单栏应用。应用正在运行，但 macOS 可能隐藏了它的图标。打开菜单栏设置并启用。";
 
 /* Cost estimation */
 "cost_header_estimated" = "费用（估算）";

@@ -1,4 +1,4 @@
-/* Brazilian Portuguese localization for CodexBar */
+/* Brazilian Portuguese localization for Burnbar */
 
 " providers" = " provedores";
 "(System)" = "(Sistema)";
@@ -37,7 +37,7 @@
 "Automatic imports browser cookies or stored sessions." = "Importa automaticamente cookies do navegador ou sessões salvas.";
 "Automatic imports browser cookies." = "Importa cookies do navegador automaticamente.";
 "Automatically imports browser session cookie." = "Importa automaticamente o cookie de sessão do navegador.";
-"Automatically opens CodexBar when you start your Mac." = "Abre o CodexBar automaticamente ao iniciar o Mac.";
+"Abre o aplicativo automaticamente ao iniciar o Mac." = "Abre o Burnbar automaticamente ao iniciar o Mac.";
 "Automation" = "Automação";
 "Average (\\(label1) + \\(label2))" = "Média (\\(label1) + \\(label2))";
 "Average (\\(metadata.sessionLabel) + \\(metadata.weeklyLabel))" = "Média (\\(metadata.sessionLabel) + \\(metadata.weeklyLabel))";
@@ -63,7 +63,7 @@
 "Choose up to \\(Self.maxOverviewProviders) providers" = "Escolha até \\(Self.maxOverviewProviders) provedores";
 "Choose up to \\(count) providers" = "Escolha até \\(count) provedores";
 "Choose what to show in the menu bar (Pace shows usage vs. expected)." = "Escolha o que mostrar na barra de menus (Ritmo mostra uso vs. esperado).";
-"Choose which Codex account CodexBar should follow." = "Escolha qual conta Codex o CodexBar deve acompanhar.";
+"Escolha qual conta Codex o aplicativo deve acompanhar." = "Escolha qual conta Codex o Burnbar deve acompanhar.";
 "Choose which window drives the menu bar percent." = "Escolha qual janela define a porcentagem da barra de menus.";
 "Chrome" = "Chrome";
 "Claude CLI not found" = "CLI do Claude não encontrada";
@@ -78,9 +78,9 @@
 "Codex binary" = "Binário do Codex";
 "Codex login failed" = "Falha no login do Codex";
 "Codex login timed out" = "Tempo esgotado no login do Codex";
-"CodexBar Lifecycle Keepalive" = "Keepalive do ciclo de vida do CodexBar";
-"CodexBar can't show its menu bar icon" = "O CodexBar não consegue mostrar o ícone na barra de menus";
-"CodexBar could not read managed account storage. " = "O CodexBar não conseguiu ler o armazenamento de contas gerenciadas. ";
+"Keepalive do ciclo de vida do Burnbar" = "Keepalive do ciclo de vida do Burnbar";
+"O aplicativo não consegue mostrar o ícone na barra de menus" = "O Burnbar não consegue mostrar o ícone na barra de menus";
+"App could not read managed account storage. " = "O Burnbar não conseguiu ler o armazenamento de contas gerenciadas. ";
 "Configure…" = "Configurar…";
 "Connected" = "Conectado";
 "Controls how much detail is logged." = "Controla o nível de detalhe dos logs.";
@@ -141,7 +141,7 @@
 "Hide details" = "Ocultar detalhes";
 "Hide personal information" = "Ocultar informações pessoais";
 "Historical tracking" = "Acompanhamento histórico";
-"How often CodexBar polls providers in the background." = "Frequência com que o CodexBar consulta provedores em segundo plano.";
+"Frequência com que o aplicativo consulta provedores em segundo plano." = "Frequência com que o Burnbar consulta provedores em segundo plano.";
 "Inactive" = "Inativo";
 "Install CLI" = "Instalar CLI";
 "Install the Claude CLI (npm i -g @anthropic-ai/claude-code) and try again." = "Instale a CLI do Claude (npm i -g @anthropic-ai/claude-code) e tente novamente.";
@@ -200,7 +200,7 @@
 "Open" = "Abrir";
 "Open API Keys" = "Abrir chaves de API";
 "Open Amp Settings" = "Abrir ajustes do Amp";
-"Open Antigravity to sign in, then refresh CodexBar." = "Abra o Antigravity para entrar e depois atualize o CodexBar.";
+"Abra o Antigravity para entrar e depois atualize." = "Abra o Antigravity para entrar e depois atualize o Burnbar.";
 "Open Browser" = "Abrir navegador";
 "Open Coding Plan" = "Abrir Coding Plan";
 "Open Console" = "Abrir console";
@@ -244,7 +244,7 @@
 "Progress bars fill as you consume quota (instead of showing remaining)." = "As barras de progresso preenchem conforme você consome a cota (em vez de mostrar o restante).";
 "Provider" = "Provedor";
 "Providers" = "Provedores";
-"Quit CodexBar" = "Encerrar CodexBar";
+"Encerrar aplicativo" = "Encerrar Burnbar";
 "Random (default)" = "Aleatório (padrão)";
 "Reads local usage logs. Shows today + last 30 days cost in the menu." = "Lê logs de uso locais. Mostra o custo de hoje + a janela de histórico selecionada no menu.";
 "Refresh" = "Atualizar";
@@ -252,8 +252,8 @@
 "Remote" = "Remoto";
 "Remove" = "Remover";
 "Remove Codex account?" = "Remover conta Codex?";
-"Remove \\(account.email) from CodexBar? Its managed Codex home will be deleted." = "Remover \\(account.email) do CodexBar? O diretório Codex gerenciado será apagado.";
-"Remove \\(email) from CodexBar? Its managed Codex home will be deleted." = "Remover \\(email) do CodexBar? O diretório Codex gerenciado será apagado.";
+"Remove \\(account.email) from Burnbar? Its managed Codex home will be deleted." = "Remover \\(account.email) do aplicativo? O diretório Codex gerenciado será apagado.";
+"Remove \\(email) from Burnbar? Its managed Codex home will be deleted." = "Remover \\(email) do aplicativo? O diretório Codex gerenciado será apagado.";
 "Remove selected account" = "Remover conta selecionada";
 "Replace critter bars with provider branding icons and a percentage." = "Substitui barras de bichinhos por ícones da marca do provedor e uma porcentagem.";
 "Replay selected animation" = "Reproduzir animação selecionada";
@@ -293,7 +293,7 @@
 "Store multiple Ollama Cookie headers." = "Armazena vários cabeçalhos Cookie do Ollama.";
 "Store multiple OpenCode Cookie headers." = "Armazena vários cabeçalhos Cookie do OpenCode.";
 "Store multiple OpenCode Go Cookie headers." = "Armazena vários cabeçalhos Cookie do OpenCode Go.";
-"Stored in the CodexBar config file." = "Armazenado no arquivo de configuração do CodexBar.";
+"Armazenado no arquivo de configuração do aplicativo." = "Armazenado no arquivo de configuração do Burnbar.";
 "Stored in ~/.burnbar/config.json. " = "Armazenado em ~/.burnbar/config.json. ";
 "Stored in ~/.burnbar/config.json. Generate one at kimi-k2.ai." = "Armazenado em ~/.burnbar/config.json. Gere um em kimi-k2.ai.";
 "Stored in ~/.burnbar/config.json. Paste the key from the Synthetic dashboard." = "Armazenado em ~/.burnbar/config.json. Cole a chave do dashboard Synthetic.";
@@ -304,7 +304,7 @@
 "Subscription Utilization" = "Uso da assinatura";
 "Surprise me" = "Surpreenda-me";
 "Switcher shows icons" = "Alternador mostra ícones";
-"Symlink CodexBarCLI to /usr/local/bin and /opt/homebrew/bin as codexbar." = "Cria symlink de CodexBarCLI em /usr/local/bin e /opt/homebrew/bin como codexbar.";
+"Cria symlink de CLI em /usr/local/bin e /opt/homebrew/bin como burnbar." = "Cria symlink de la aplicaciónCLI em /usr/local/bin e /opt/homebrew/bin como burnbar.";
 "System" = "Sistema";
 "Temporarily shows the loading animation after the next refresh." = "Mostra temporariamente a animação de carregamento após a próxima atualização.";
 "Tertiary (\\(label))" = "Terciário (\\(label))";
@@ -368,8 +368,8 @@
 "cursor_on_demand" = "Sob demanda: %@";
 "cursor_on_demand_with_limit" = "Sob demanda: %1$@ / %2$@";
 "extra_usage_format" = "Uso extra: %1$@ / %2$@";
-"jetbrains_detected_generate" = "Detectado: %@. Use o assistente de IA uma vez para gerar dados de cota e atualize o CodexBar.";
-"jetbrains_detected_select" = "Detectado: %@. Selecione sua IDE preferida em Ajustes e atualize o CodexBar.";
+"jetbrains_detected_generate" = "Detectado: %@. Use o assistente de IA uma vez para gerar dados de cota e atualize.";
+"jetbrains_detected_select" = "Detectado: %@. Selecione sua IDE preferida em Ajustes e atualize.";
 "last_fetch_failed_with_provider" = "Última busca de %@ falhou:";
 "last_spend" = "Último gasto: %@";
 "mcp_model_usage" = "%1$@: %2$@";
@@ -379,10 +379,10 @@
 "metric_primary" = "Primário (%@)";
 "metric_secondary" = "Secundário (%@)";
 "metric_tertiary" = "Terciário (%@)";
-"multiple_workspaces_found" = "O CodexBar encontrou vários workspaces para %@. Escolha o workspace para adicionar.";
+"multiple_workspaces_found" = "O aplicativo encontrou vários workspaces para %@. Escolha o workspace para adicionar.";
 "ory_session_…=…; csrftoken=…" = "ory_session_…=…; csrftoken=…";
 "overview_choose_providers" = "Escolha até %@ provedores";
-"remove_account_message" = "Remover %@ do CodexBar? O diretório Codex gerenciado será apagado.";
+"remove_account_message" = "Remover %@? O diretório gerenciado será apagado.";
 "version_format" = "Versão %@";
 "vertex_ai_login_instructions" = "Para acompanhar o uso do Vertex AI, autentique-se no Google Cloud.\n\n1. Abra o Terminal\n2. Execute: gcloud auth application-default login\n3. Siga os prompts no navegador para entrar\n4. Defina seu projeto: gcloud config set project PROJECT_ID\n\nAbrir o Terminal agora?";
 "workspaceID is set but only opencode, opencodego, and deepgram support workspaceID." = "workspaceID está definido, mas somente opencode, opencodego e deepgram oferecem suporte a workspaceID.";
@@ -401,13 +401,13 @@
 "language_chinese_simplified" = "Chinês simplificado";
 "language_portuguese_brazilian" = "Português (Brasil)";
 "start_at_login_title" = "Iniciar ao fazer login";
-"start_at_login_subtitle" = "Abre o CodexBar automaticamente ao iniciar o Mac.";
+"start_at_login_subtitle" = "Abre o aplicativo automaticamente ao iniciar o Mac.";
 "show_cost_summary" = "Mostrar resumo de custos";
 "show_cost_summary_subtitle" = "Lê logs de uso locais. Mostra o custo de hoje + janela selecionada no menu.";
 "cost_history_days_title" = "Janela do histórico: %d dias";
 "cost_auto_refresh_info" = "Atualização automática: a cada hora · Timeout: 10 min";
 "refresh_cadence_title" = "Cadência de atualização";
-"refresh_cadence_subtitle" = "Frequência com que o CodexBar consulta provedores em segundo plano.";
+"refresh_cadence_subtitle" = "Frequência com que o aplicativo consulta provedores em segundo plano.";
 "manual_refresh_hint" = "A atualização automática está desativada; use Atualizar no menu.";
 "check_provider_status_title" = "Verificar status dos provedores";
 "check_provider_status_subtitle" = "Consulta páginas de status da OpenAI/Claude e o Google Workspace para Gemini/Antigravity, exibindo incidentes no ícone e no menu.";
@@ -433,7 +433,7 @@
 "quota_warning_upper" = "Limite superior";
 "quota_warning_lower" = "Limite inferior";
 "apply" = "Aplicar";
-"quit_app" = "Encerrar CodexBar";
+"quit_app" = "Encerrar aplicativo";
 
 /* Tab titles */
 "tab_general" = "Geral";
@@ -454,8 +454,8 @@
 "managed_login_already_running" = "Um login gerenciado do Codex já está em andamento. Aguarde terminar antes de adicionar ou reautenticar outra conta.";
 "managed_login_failed" = "O login gerenciado do Codex não foi concluído. Verifique se `codex --version` funciona no Terminal. Se o macOS bloqueou ou moveu `codex` para o Lixo, remova instalações duplicadas antigas, execute `npm install -g --include=optional @openai/codex@latest` e tente novamente.";
 "managed_login_missing_email" = "O login do Codex foi concluído, mas nenhum e-mail da conta estava disponível. Tente novamente após confirmar que a conta está totalmente conectada.";
-"workspace_selection_cancelled" = "O CodexBar encontrou vários workspaces, mas nenhum foi selecionado.";
-"unsafe_managed_home" = "O CodexBar se recusou a modificar um caminho de diretório gerenciado inesperado: %@";
+"workspace_selection_cancelled" = "O aplicativo encontrou vários workspaces, mas nenhum foi selecionado.";
+"unsafe_managed_home" = "O aplicativo se recusou a modificar um caminho de diretório gerenciado inesperado: %@";
 "menu_bar_metric_title" = "Métrica da barra de menus";
 "menu_bar_metric_subtitle" = "Escolha qual janela define a porcentagem da barra de menus.";
 "menu_bar_metric_subtitle_deepseek" = "Mostra o saldo do DeepSeek na barra de menus.";
@@ -506,8 +506,8 @@
 "open_menu_shortcut_title" = "Abrir menu";
 "open_menu_shortcut_subtitle" = "Aciona o menu da barra de menus de qualquer lugar.";
 "install_cli" = "Instalar CLI";
-"install_cli_subtitle" = "Cria symlink de CodexBarCLI em /usr/local/bin e /opt/homebrew/bin como codexbar.";
-"cli_not_found" = "CodexBarCLI não encontrado no pacote do app.";
+"install_cli_subtitle" = "Cria symlink de CLI em /usr/local/bin e /opt/homebrew/bin como burnbar.";
+"cli_not_found" = "CLI não encontrado no pacote do app.";
 "no_writable_bin_dirs" = "Nenhum diretório bin gravável encontrado.";
 "show_debug_settings_title" = "Mostrar ajustes de depuração";
 "show_debug_settings_subtitle" = "Exibe ferramentas de diagnóstico na aba Depuração.";
@@ -592,7 +592,7 @@
 "login_shell_path" = "PATH do shell de login (captura na inicialização)";
 "cleared" = "Limpo.";
 "no_fetch_attempts" = "Ainda sem tentativas de busca.";
-"macOS Tahoe can block menu bar apps in System Settings → Menu Bar → Allow in the Menu Bar. CodexBar is running, but macOS may be hiding its icon. Open Menu Bar settings and turn CodexBar on." = "O macOS Tahoe pode bloquear apps da barra de menus em Ajustes do Sistema → Barra de Menus → Permitir na Barra de Menus. O CodexBar está em execução, mas o macOS pode estar ocultando seu ícone. Abra os ajustes da Barra de Menus e ative o CodexBar.";
+"macOS Tahoe can block menu bar apps in System Settings → Menu Bar → Allow in the Menu Bar. Burnbar is running, but macOS may be hiding its icon. Open Menu Bar settings and turn Burnbar on." = "O macOS Tahoe pode bloquear apps da barra de menus em Ajustes do Sistema → Barra de Menus → Permitir na Barra de Menus. O Burnbar está em execução, mas o macOS pode estar ocultando seu ícone. Abra os ajustes da Barra de Menus e ative o Burnbar.";
 
 /* Metric preferences */
 "metric_pref_automatic" = "Automático";
