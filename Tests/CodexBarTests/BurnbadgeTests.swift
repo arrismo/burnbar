@@ -79,7 +79,8 @@ struct BurnbadgeTests {
     @Test
     func `client creates project and publishes usage with expected requests`() async throws {
         let session = Self.stubbedSession()
-        let client = BurnbadgeClient(baseURL: URL(string: "https://burnbadge.test")!, session: session)
+        let baseURL = try #require(URL(string: "https://burnbadge.test"))
+        let client = BurnbadgeClient(baseURL: baseURL, session: session)
         BurnbadgeStubURLProtocol.requests = []
         BurnbadgeStubURLProtocol.handler = { request in
             let path = request.url?.path
@@ -149,7 +150,8 @@ struct BurnbadgeTests {
     @Test
     func `client fetches status and renders markdown URLs`() async throws {
         let session = Self.stubbedSession()
-        let client = BurnbadgeClient(baseURL: URL(string: "https://burnbadge.test")!, session: session)
+        let baseURL = try #require(URL(string: "https://burnbadge.test"))
+        let client = BurnbadgeClient(baseURL: baseURL, session: session)
         BurnbadgeStubURLProtocol.requests = []
         BurnbadgeStubURLProtocol.handler = { request in
             #expect(request.httpMethod == "GET")
@@ -194,16 +196,20 @@ struct BurnbadgeTests {
         let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         let configURL = directory.appendingPathComponent("config.json")
         let store = BurnbarConfigStore(fileURL: configURL)
+        let badgeURL = try #require(URL(string: "https://burnbadge.test/api/badge/badge-token"))
+        let chartURL = try #require(URL(string: "https://burnbadge.test/api/chart/usage-token"))
+        let usageURL = try #require(URL(string: "https://burnbadge.test/api/usage/usage-token"))
+        let baseURL = try #require(URL(string: "https://burnbadge.test"))
         let project = BurnbadgeProject(
             token: "badge-token",
             badgeToken: "badge-token",
             usageToken: "usage-token",
-            badgeUrl: URL(string: "https://burnbadge.test/api/badge/badge-token")!,
-            chartUrl: URL(string: "https://burnbadge.test/api/chart/usage-token")!,
-            usageUrl: URL(string: "https://burnbadge.test/api/usage/usage-token")!)
+            badgeUrl: badgeURL,
+            chartUrl: chartURL,
+            usageUrl: usageURL)
 
         let saved = try store.update { config in
-            config.baseURL = URL(string: "https://burnbadge.test")!
+            config.baseURL = baseURL
             config.projects[BurnbarConfigStore.key(for: .codex)] = BurnbarProjectConfig(
                 provider: .codex,
                 burnbadgeProvider: .openai,
