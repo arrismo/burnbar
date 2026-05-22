@@ -576,7 +576,7 @@ struct MenuDescriptor {
         entries.append(contentsOf: [
             .action("Refresh", .refresh),
             .action("Settings...", .settings),
-            .action("About CodexBar", .about),
+            .action(L("menu_about"), .about),
             .action("Quit", .quit),
         ])
         return Section(entries: entries)
