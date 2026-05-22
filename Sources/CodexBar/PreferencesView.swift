@@ -6,6 +6,7 @@ enum PreferencesTab: String, CaseIterable, Hashable {
     case general
     case providers
     case display
+    case burnbadge
     case advanced
     case about
     case debug
@@ -19,6 +20,7 @@ enum PreferencesTab: String, CaseIterable, Hashable {
         case .general: L("tab_general")
         case .providers: L("tab_providers")
         case .display: L("tab_display")
+        case .burnbadge: "Burnbadge"
         case .advanced: L("tab_advanced")
         case .about: L("tab_about")
         case .debug: L("tab_debug")
@@ -86,6 +88,10 @@ struct PreferencesView: View {
             DisplayPane(settings: self.settings, store: self.store)
                 .tabItem { Label(L("tab_display"), systemImage: "eye") }
                 .tag(PreferencesTab.display)
+
+            BurnbadgePane()
+                .tabItem { Label("Burnbadge", systemImage: "flame") }
+                .tag(PreferencesTab.burnbadge)
 
             AdvancedPane(settings: self.settings)
                 .tabItem { Label(L("tab_advanced"), systemImage: "slider.horizontal.3") }

@@ -60,11 +60,23 @@ public final class BurnbarConfigStore: Sendable {
     }
 
     public func load() throws -> BurnbarConfig {
-        guard FileManager.default.fileExists(atPath: self.fileURL.path) else {
-            return BurnbarConfig()
+        if FileManager.default.fileExists(atPath: self.fileURL.path) {
+            let data = try Data(contentsOf: self.fileURL)
+            return try self.decoder.decode(BurnbarConfig.self, from: data)
         }
-        let data = try Data(contentsOf: self.fileURL)
-        return try self.decoder.decode(BurnbarConfig.self, from: data)
+
+        // Early Burnbadge CLI builds wrote project tokens to ~/.burnbar/config.json. The app now uses that
+        // file for provider settings, so Burnbadge state lives in burnbadge.json and only reads the legacy
+        // location when it still contains the Burnbadge schema.
+        let legacyURL = Self.legacyConfigURL()
+        if self.fileURL == Self.defaultConfigURL(), FileManager.default.fileExists(atPath: legacyURL.path) {
+            let data = try Data(contentsOf: legacyURL)
+            if let legacy = try? self.decoder.decode(BurnbarConfig.self, from: data) {
+                return legacy
+            }
+        }
+
+        return BurnbarConfig()
     }
 
     public func save(_ config: BurnbarConfig) throws {
@@ -89,6 +101,11 @@ public final class BurnbarConfigStore: Sendable {
     }
 
     public static func defaultConfigURL() -> URL {
+        let home = FileManager.default.homeDirectoryForCurrentUser
+        return home.appendingPathComponent(".burnbar/burnbadge.json")
+    }
+
+    public static func legacyConfigURL() -> URL {
         let home = FileManager.default.homeDirectoryForCurrentUser
         return home.appendingPathComponent(".burnbar/config.json")
     }
