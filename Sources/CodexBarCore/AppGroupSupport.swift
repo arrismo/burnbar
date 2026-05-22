@@ -6,8 +6,8 @@ import Security
 public enum AppGroupSupport {
     public static let defaultTeamID = "Y5PE65HELJ"
     public static let teamIDInfoKey = "CodexBarTeamID"
-    public static let legacyReleaseGroupID = "group.com.steipete.codexbar"
-    public static let legacyDebugGroupID = "group.com.steipete.codexbar.debug"
+    public static let legacyReleaseGroupID = "group.com.arrismo.burnbar"
+    public static let legacyDebugGroupID = "group.com.arrismo.burnbar.debug"
     public static let widgetSnapshotFilename = "widget-snapshot.json"
     public static let migrationVersion = 1
     public static let migrationVersionKey = "appGroupMigrationVersion"
@@ -40,7 +40,7 @@ public enum AppGroupSupport {
     }
 
     static func currentGroupID(teamID: String, bundleID: String?) -> String {
-        let base = "\(teamID).com.steipete.codexbar"
+        let base = "\(teamID).com.arrismo.burnbar"
         return self.isDebugBundleID(bundleID) ? "\(base).debug" : base
     }
 

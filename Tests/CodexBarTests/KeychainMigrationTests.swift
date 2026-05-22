@@ -6,16 +6,16 @@ struct KeychainMigrationTests {
     func `migration list covers known keychain items`() {
         let items = Set(KeychainMigration.itemsToMigrate.map(\.label))
         let expected: Set = [
-            "com.steipete.CodexBar:codex-cookie",
-            "com.steipete.CodexBar:claude-cookie",
-            "com.steipete.CodexBar:cursor-cookie",
-            "com.steipete.CodexBar:factory-cookie",
-            "com.steipete.CodexBar:minimax-cookie",
-            "com.steipete.CodexBar:minimax-api-token",
-            "com.steipete.CodexBar:augment-cookie",
-            "com.steipete.CodexBar:copilot-api-token",
-            "com.steipete.CodexBar:zai-api-token",
-            "com.steipete.CodexBar:synthetic-api-key",
+            "com.arrismo.Burnbar:codex-cookie",
+            "com.arrismo.Burnbar:claude-cookie",
+            "com.arrismo.Burnbar:cursor-cookie",
+            "com.arrismo.Burnbar:factory-cookie",
+            "com.arrismo.Burnbar:minimax-cookie",
+            "com.arrismo.Burnbar:minimax-api-token",
+            "com.arrismo.Burnbar:augment-cookie",
+            "com.arrismo.Burnbar:copilot-api-token",
+            "com.arrismo.Burnbar:zai-api-token",
+            "com.arrismo.Burnbar:synthetic-api-key",
         ]
 
         let missing = expected.subtracting(items)

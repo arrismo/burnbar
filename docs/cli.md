@@ -12,45 +12,45 @@ A lightweight Commander-based CLI that mirrors the menu bar app’s provider fet
 Use it when you need usage numbers in scripts, CI, or dashboards without UI.
 
 ## Install
-- In the app: **Preferences → Advanced → Install CLI**. This symlinks `CodexBarCLI` to `/usr/local/bin/codexbar` and `/opt/homebrew/bin/codexbar`.
-- From the repo, after installing `CodexBar.app` in `/Applications`: `./bin/install-codexbar-cli.sh` (same symlink targets).
-- Manual: `ln -sf "/Applications/CodexBar.app/Contents/Helpers/CodexBarCLI" /usr/local/bin/codexbar`.
+- In the app: **Preferences → Advanced → Install CLI**. This symlinks `CodexBarCLI` to `/usr/local/bin/burnbar` and `/opt/homebrew/bin/burnbar`.
+- From the repo, after installing `Burnbar.app` in `/Applications`: `./bin/install-burnbar-cli.sh` (same symlink targets).
+- Manual: `ln -sf "/Applications/Burnbar.app/Contents/Helpers/CodexBarCLI" /usr/local/bin/burnbar`.
 
 ### Release tarball install (macOS/Linux)
-- Homebrew formula (Linux today): `brew install steipete/tap/codexbar`.
+- Homebrew formula (Linux today): `brew install steipete/tap/burnbar`.
 - Download release tarballs from GitHub Releases:
-  - macOS: `CodexBarCLI-v<tag>-macos-arm64.tar.gz`, `CodexBarCLI-v<tag>-macos-x86_64.tar.gz`
-  - Linux: `CodexBarCLI-v<tag>-linux-aarch64.tar.gz`, `CodexBarCLI-v<tag>-linux-x86_64.tar.gz`
-- Extract and run `./codexbar` (symlink) or `./CodexBarCLI`.
+  - macOS: `BurnbarCLI-v<tag>-macos-arm64.tar.gz`, `BurnbarCLI-v<tag>-macos-x86_64.tar.gz`
+  - Linux: `BurnbarCLI-v<tag>-linux-aarch64.tar.gz`, `BurnbarCLI-v<tag>-linux-x86_64.tar.gz`
+- Extract and run `./burnbar` (symlink) or `./CodexBarCLI`.
 
 ```
-tar -xzf CodexBarCLI-v0.17.0-macos-x86_64.tar.gz
-./codexbar --version
-./codexbar usage --format json --pretty
+tar -xzf BurnbarCLI-v0.17.0-macos-x86_64.tar.gz
+./burnbar --version
+./burnbar usage --format json --pretty
 ```
 
 ## Build
-- `./Scripts/package_app.sh` (or `./Scripts/compile_and_run.sh`) bundles `CodexBarCLI` into `CodexBar.app/Contents/Helpers/CodexBarCLI`.
+- `./Scripts/package_app.sh` (or `./Scripts/compile_and_run.sh`) bundles `CodexBarCLI` into `Burnbar.app/Contents/Helpers/CodexBarCLI`.
 - Standalone: `swift build -c release --product CodexBarCLI` (binary at `./.build/release/CodexBarCLI`).
 - Dependencies: Swift 6.2+, Commander package (`https://github.com/steipete/Commander`).
 
 ## Configuration
-CodexBar reads `~/.codexbar/config.json` for provider settings, secrets, and ordering.
+Burnbar reads `~/.burnbar/config.json` for provider settings, secrets, and ordering.
 See `docs/configuration.md` for the schema.
 
 ## Command
-- `codexbar` defaults to the `usage` command.
+- `burnbar` defaults to the `usage` command.
   - `--format text|json` (default: text).
-- `codexbar cost` prints local token cost usage for Claude + Codex without web/CLI access.
+- `burnbar cost` prints local token cost usage for Claude + Codex without web/CLI access.
   - `--format text|json` (default: text).
   - `--refresh` ignores cached scans.
-- `codexbar serve` starts a foreground localhost-only HTTP server for usage and cost JSON.
+- `burnbar serve` starts a foreground localhost-only HTTP server for usage and cost JSON.
   - `--port <port>` defaults to `8080`.
   - `--refresh-interval <seconds>` defaults to `60` and controls the in-memory response cache TTL.
   - v1 binds to `127.0.0.1` only and rejects non-loopback `Host` headers. It does not expose remote bind, auth, CORS, TLS, or daemon mode.
   - Endpoints: `GET /health`, `GET /usage`, `GET /usage?provider=<id|both|all>`, `GET /cost`, `GET /cost?provider=<id|both|all>`.
   - Codex usage responses include every visible Codex account, matching the menu bar switcher.
-- `codexbar cache clear` clears local CodexBar caches.
+- `burnbar cache clear` clears local CodexBar caches.
   - `--cookies` removes cached browser-cookie headers from the CodexBar Keychain cache.
   - `--cookies --provider <id>` removes browser-cookie cache entries for that provider, including managed Codex account scopes.
   - `--cost` removes local cost-usage scan caches.
@@ -81,13 +81,13 @@ See `docs/configuration.md` for the schema.
 - Global flags: `-h/--help`, `-V/--version`, `-v/--verbose`, `--no-color`, `--log-level <trace|verbose|debug|info|warning|error|critical>`, `--json-output`, `--json-only`.
   - `--json-output`: JSONL logs on stderr (machine-readable).
   - `--json-only`: suppress non-JSON output; errors become JSON payloads.
-- `codexbar config validate` checks `~/.codexbar/config.json` for invalid fields.
+- `burnbar config validate` checks `~/.burnbar/config.json` for invalid fields.
   - `--format text|json`, `--pretty`, and `--json-only` are supported.
   - Warnings keep exit code 0; errors exit non-zero.
-- `codexbar config dump` prints the normalized config JSON.
+- `burnbar config dump` prints the normalized config JSON.
 
 ### Token accounts
-The CLI reads multi-account tokens from `~/.codexbar/config.json` (same file as the app).
+The CLI reads multi-account tokens from `~/.burnbar/config.json` (same file as the app).
 - Select a specific account: `--account <label>` (matches the label/email in the file).
 - Select by index (1-based): `--account-index <n>`.
 - Fetch all accounts for the provider: `--all-accounts`.
@@ -96,13 +96,13 @@ For Claude, token accounts accept either `sessionKey` cookies or OAuth access to
 OAuth usage requires the `user:profile` scope; inference-only tokens will return an error.
 
 ### Codex accounts
-For Codex, `--all-accounts` and `codexbar serve` enumerate the same visible accounts as the app switcher:
+For Codex, `--all-accounts` and `burnbar serve` enumerate the same visible accounts as the app switcher:
 managed Codex accounts from `managed-codex-accounts.json` plus the live system account when present.
 Each fetch is scoped to that account's Codex home before the normal Codex web/OAuth/CLI strategy runs, and JSON
 payloads include the visible account label in `account`.
 
 ### Cost JSON payload
-`codexbar cost --format json` emits an array of payloads (one per provider).
+`burnbar cost --format json` emits an array of payloads (one per provider).
 - `provider`, `source`, `updatedAt`
 - `sessionTokens`, `sessionCostUSD`
 - `last30DaysTokens`, `last30DaysCostUSD`
@@ -111,33 +111,33 @@ payloads include the visible account label in `account`.
 
 ## Example usage
 ```
-codexbar                          # text, respects app toggles
-codexbar --provider claude        # force Claude
-codexbar --provider all           # query all registered providers
-codexbar --format json --pretty   # machine output
-codexbar --format json --provider both
-codexbar cost                     # local cost usage (default 30-day window + today)
-codexbar cost --days 90           # choose a 1...365 day cost window
-codexbar cost --provider claude --format json --pretty
-codexbar serve --port 8080        # localhost HTTP JSON server
-COPILOT_API_TOKEN=... codexbar --provider copilot --format json --pretty
-codexbar --status                 # include status page indicator/description
-codexbar --provider codex --source oauth --format json --pretty
-codexbar --provider codex --source web --format json --pretty
-codexbar --provider codex --all-accounts --format json --pretty
-codexbar --provider claude --account steipete@gmail.com
-codexbar --provider claude --all-accounts --format json --pretty
-codexbar --json-only --format json --pretty
-codexbar --provider gemini --source api --format json --pretty
-KILO_API_KEY=... codexbar --provider kilo --source api --format json --pretty
-MOONSHOT_API_KEY=... codexbar --provider moonshot --source api --format json --pretty
-codexbar config validate --format json --pretty
-codexbar config dump --pretty
-printf '%s' "$OPENAI_ADMIN_KEY" | codexbar config set-api-key --provider openai --stdin
-codexbar config enable --provider grok
-codexbar cache clear --cookies
-codexbar cache clear --cookies --provider claude
-codexbar cache clear --all --format json --pretty
+burnbar                          # text, respects app toggles
+burnbar --provider claude        # force Claude
+burnbar --provider all           # query all registered providers
+burnbar --format json --pretty   # machine output
+burnbar --format json --provider both
+burnbar cost                     # local cost usage (default 30-day window + today)
+burnbar cost --days 90           # choose a 1...365 day cost window
+burnbar cost --provider claude --format json --pretty
+burnbar serve --port 8080        # localhost HTTP JSON server
+COPILOT_API_TOKEN=... burnbar --provider copilot --format json --pretty
+burnbar --status                 # include status page indicator/description
+burnbar --provider codex --source oauth --format json --pretty
+burnbar --provider codex --source web --format json --pretty
+burnbar --provider codex --all-accounts --format json --pretty
+burnbar --provider claude --account steipete@gmail.com
+burnbar --provider claude --all-accounts --format json --pretty
+burnbar --json-only --format json --pretty
+burnbar --provider gemini --source api --format json --pretty
+KILO_API_KEY=... burnbar --provider kilo --source api --format json --pretty
+MOONSHOT_API_KEY=... burnbar --provider moonshot --source api --format json --pretty
+burnbar config validate --format json --pretty
+burnbar config dump --pretty
+printf '%s' "$OPENAI_ADMIN_KEY" | burnbar config set-api-key --provider openai --stdin
+burnbar config enable --provider grok
+burnbar cache clear --cookies
+burnbar cache clear --cookies --provider claude
+burnbar cache clear --all --format json --pretty
 ```
 
 ### Sample output (text)

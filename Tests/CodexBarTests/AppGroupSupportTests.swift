@@ -6,17 +6,17 @@ struct AppGroupSupportTests {
     @Test
     func `app group identifiers use resolved team-prefixed release and debug variants`() {
         #expect(
-            AppGroupSupport.currentGroupID(teamID: "Y5PE65HELJ", bundleID: "com.steipete.codexbar")
-                == "Y5PE65HELJ.com.steipete.codexbar")
+            AppGroupSupport.currentGroupID(teamID: "Y5PE65HELJ", bundleID: "com.arrismo.burnbar")
+                == "Y5PE65HELJ.com.arrismo.burnbar")
         #expect(
-            AppGroupSupport.currentGroupID(teamID: "ABCDE12345", bundleID: "com.steipete.codexbar.debug")
-                == "ABCDE12345.com.steipete.codexbar.debug")
+            AppGroupSupport.currentGroupID(teamID: "ABCDE12345", bundleID: "com.arrismo.burnbar.debug")
+                == "ABCDE12345.com.arrismo.burnbar.debug")
         #expect(
-            AppGroupSupport.legacyGroupID(for: "com.steipete.codexbar")
-                == "group.com.steipete.codexbar")
+            AppGroupSupport.legacyGroupID(for: "com.arrismo.burnbar")
+                == "group.com.arrismo.burnbar")
         #expect(
-            AppGroupSupport.legacyGroupID(for: "com.steipete.codexbar.debug")
-                == "group.com.steipete.codexbar.debug")
+            AppGroupSupport.legacyGroupID(for: "com.arrismo.burnbar.debug")
+                == "group.com.arrismo.burnbar.debug")
     }
 
     @Test
@@ -62,7 +62,7 @@ struct AppGroupSupportTests {
 
         let currentSnapshotURL = root.appendingPathComponent("current/widget-snapshot.json", isDirectory: false)
         let result = AppGroupSupport.migrateLegacyDataIfNeeded(
-            bundleID: "com.steipete.codexbar",
+            bundleID: "com.arrismo.burnbar",
             standardDefaults: standardDefaults,
             currentDefaultsOverride: currentDefaults,
             legacyDefaultsOverride: legacyDefaults,
@@ -80,7 +80,7 @@ struct AppGroupSupportTests {
                 == AppGroupSupport.migrationVersion)
 
         let secondResult = AppGroupSupport.migrateLegacyDataIfNeeded(
-            bundleID: "com.steipete.codexbar",
+            bundleID: "com.arrismo.burnbar",
             standardDefaults: standardDefaults,
             currentDefaultsOverride: currentDefaults,
             legacyDefaultsOverride: legacyDefaults,
@@ -108,7 +108,7 @@ struct AppGroupSupportTests {
         legacyDefaults.set(UsageProvider.cursor.rawValue, forKey: "widgetSelectedProvider")
 
         let result = AppGroupSupport.migrateLegacyDataIfNeeded(
-            bundleID: "com.steipete.codexbar",
+            bundleID: "com.arrismo.burnbar",
             standardDefaults: standardDefaults,
             currentDefaultsOverride: currentDefaults,
             legacyDefaultsOverride: legacyDefaults)

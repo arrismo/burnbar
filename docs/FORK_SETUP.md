@@ -18,7 +18,7 @@ read_when:
 ```bash
 # Verify your fork is origin
 git remote -v
-# Should show: origin  git@github.com:topoffunnel/CodexBar.git
+# Should show: origin  git@github.com:arrismo/burnbar.git
 
 # Add upstream (steipete's original)
 git remote add upstream https://github.com/steipete/CodexBar.git
@@ -32,7 +32,7 @@ git fetch --all
 # Verify setup
 git remote -v
 # Should show:
-# origin    git@github.com:topoffunnel/CodexBar.git (fetch/push)
+# origin    git@github.com:arrismo/burnbar.git (fetch/push)
 # upstream  https://github.com/steipete/CodexBar.git (fetch/push)
 # quotio    https://github.com/nguyenphutrong/quotio.git (fetch/push)
 ```
@@ -263,7 +263,7 @@ git push origin upstream-pr/fix-cursor-bonus
 # 6. Create PR on GitHub
 # Go to: https://github.com/steipete/CodexBar
 # Click "New Pull Request"
-# Select: base: steipete:main <- compare: topoffunnel:upstream-pr/fix-cursor-bonus
+# Select: base: steipete:main <- compare: arrismo:upstream-pr/fix-cursor-bonus
 ```
 
 ---

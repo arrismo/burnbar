@@ -7,7 +7,7 @@ read_when:
 
 # Multi-Upstream Fork Management Strategy
 
-**Fork:** topoffunnel/CodexBar  
+**Fork:** arrismo/burnbar  
 **Upstream 1:** steipete/CodexBar (original)  
 **Upstream 2:** nguyenphutrong/quotio (inspiration source)
 
@@ -41,7 +41,7 @@ read_when:
 
 ```bash
 # Your fork (origin)
-git remote add origin git@github.com:topoffunnel/CodexBar.git
+git remote add origin git@github.com:arrismo/burnbar.git
 
 # Original upstream (steipete)
 git remote add upstream git@github.com:steipete/CodexBar.git
@@ -256,7 +256,7 @@ Implemented independently with CodexBar-specific patterns."
 - Multi-account management (major architectural change)
 - Fork-specific UI customizations
 - Experimental features
-- topoffunnel.com-specific integrations
+- Burnbar-specific integrations
 
 ### Creating Upstream PR Branch
 
@@ -324,9 +324,7 @@ git push origin upstream-pr/fix-cursor-bonus
 feat: add multi-account management for Augment
 
 Implements account switching UI and storage.
-Fork-specific feature for topoffunnel.com users.
-
-Co-authored-by: Brandon Charleson <brandon@topoffunnel.com>
+Fork-specific feature for Burnbar users.
 ```
 
 ### Upstream-Bound Commits (Generic)

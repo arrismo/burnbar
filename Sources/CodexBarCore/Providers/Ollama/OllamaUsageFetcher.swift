@@ -41,7 +41,7 @@ public enum OllamaUsageError: LocalizedError, Sendable {
     public var errorDescription: String? {
         switch self {
         case .missingAPIKey:
-            "Missing Ollama API key. Set apiKey in ~/.codexbar/config.json or OLLAMA_API_KEY."
+            "Missing Ollama API key. Set apiKey in ~/.burnbar/config.json or OLLAMA_API_KEY."
         case .notLoggedIn:
             "Not logged in to Ollama. Please log in via ollama.com/settings."
         case .invalidCredentials:

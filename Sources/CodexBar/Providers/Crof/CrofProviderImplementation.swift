@@ -31,7 +31,7 @@ struct CrofProviderImplementation: ProviderImplementation {
             ProviderSettingsFieldDescriptor(
                 id: "crof-api-key",
                 title: "API key",
-                subtitle: "Stored in ~/.codexbar/config.json. You can also provide CROF_API_KEY.",
+                subtitle: "Stored in ~/.burnbar/config.json. You can also provide CROF_API_KEY.",
                 kind: .secure,
                 placeholder: "crof_...",
                 binding: context.stringBinding(\.crofAPIToken),

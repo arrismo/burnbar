@@ -59,6 +59,12 @@ extension CodexBarCLI {
             if let version = Self.adjacentVersionFileVersion(for: executableURL) {
                 return version
             }
+            let resolvedURL = executableURL.resolvingSymlinksInPath()
+            if resolvedURL != executableURL,
+               let version = Self.containingAppVersion(for: resolvedURL)
+            {
+                return version
+            }
         }
         return Self.normalizedBundleVersion(bundleVersion)
     }

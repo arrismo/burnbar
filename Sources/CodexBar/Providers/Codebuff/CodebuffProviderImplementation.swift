@@ -18,7 +18,7 @@ struct CodebuffProviderImplementation: ProviderImplementation {
             ProviderSettingsFieldDescriptor(
                 id: "codebuff-api-key",
                 title: "API key",
-                subtitle: "Stored in ~/.codexbar/config.json. You can also provide CODEBUFF_API_KEY or let " +
+                subtitle: "Stored in ~/.burnbar/config.json. You can also provide CODEBUFF_API_KEY or let " +
                     "CodexBar read ~/.config/manicode/credentials.json (created by `codebuff login`).",
                 kind: .secure,
                 placeholder: "cb_...",

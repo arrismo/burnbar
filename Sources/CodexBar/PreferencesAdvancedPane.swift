@@ -116,8 +116,8 @@ extension AdvancedPane {
         }
 
         let destinations = [
-            "/usr/local/bin/codexbar",
-            "/opt/homebrew/bin/codexbar",
+            "/usr/local/bin/burnbar",
+            "/opt/homebrew/bin/burnbar",
         ]
 
         var results: [String] = []

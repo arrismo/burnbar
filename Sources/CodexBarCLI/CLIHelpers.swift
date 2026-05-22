@@ -156,8 +156,8 @@ extension CodexBarCLI {
 
     static func resetTimeDisplayStyleFromDefaults() -> ResetTimeDisplayStyle {
         let domains = [
-            "com.steipete.codexbar",
-            "com.steipete.codexbar.debug",
+            "com.arrismo.burnbar",
+            "com.arrismo.burnbar.debug",
         ]
         for domain in domains {
             if let value = UserDefaults(suiteName: domain)?.object(forKey: "resetTimesShowAbsolute") as? Bool {

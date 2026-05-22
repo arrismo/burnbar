@@ -7,7 +7,7 @@ extension CodexBarCLI {
         CodexBar \(version)
 
         Usage:
-          codexbar usage [--format text|json]
+          burnbar usage [--format text|json]
                        [--json]
                        [--json-only]
                        [--json-output] [--log-level <trace|verbose|debug|info|warning|error|critical>] [-v|--verbose]
@@ -26,7 +26,7 @@ extension CodexBarCLI {
             Auto falls back to Claude CLI only when cookies are missing.
           - Kilo: app.kilo.ai API.
             Auto falls back to Kilo CLI when API credentials are missing or unauthorized.
-          Token accounts are loaded from ~/.codexbar/config.json.
+          Token accounts are loaded from ~/.burnbar/config.json.
           Use --account or --account-index to select a specific token account.
           Use --all-accounts to fetch every token account, or every visible Codex account for Codex.
           Account selection requires a single provider.
@@ -40,13 +40,13 @@ extension CodexBarCLI {
           --json-output   Emit machine-readable logs (JSONL) to stderr
 
         Examples:
-          codexbar usage
-          codexbar usage --provider claude
-          codexbar usage --provider gemini
-          codexbar usage --format json --provider all --pretty
-          codexbar usage --provider all --json
-          codexbar usage --status
-          codexbar usage --provider codex --source web --format json --pretty
+          burnbar usage
+          burnbar usage --provider claude
+          burnbar usage --provider gemini
+          burnbar usage --format json --provider all --pretty
+          burnbar usage --provider all --json
+          burnbar usage --status
+          burnbar usage --provider codex --source web --format json --pretty
         """
     }
 
@@ -55,7 +55,7 @@ extension CodexBarCLI {
         CodexBar \(version)
 
         Usage:
-          codexbar cost [--format text|json]
+          burnbar cost [--format text|json]
                        [--json]
                        [--json-only]
                        [--json-output] [--log-level <trace|verbose|debug|info|warning|error|critical>] [-v|--verbose]
@@ -67,8 +67,8 @@ extension CodexBarCLI {
           This does not require web or CLI access and uses cached scan results unless --refresh is provided.
 
         Examples:
-          codexbar cost
-          codexbar cost --provider claude --format json --pretty
+          burnbar cost
+          burnbar cost --provider claude --format json --pretty
         """
     }
 
@@ -77,7 +77,7 @@ extension CodexBarCLI {
         CodexBar \(version)
 
         Usage:
-          codexbar serve [--port <port>] [--refresh-interval <seconds>]
+          burnbar serve [--port <port>] [--refresh-interval <seconds>]
                          [--json-output] [--log-level <trace|verbose|debug|info|warning|error|critical>]
                          [-v|--verbose]
 
@@ -94,8 +94,8 @@ extension CodexBarCLI {
           GET /cost?provider=codex
 
         Examples:
-          codexbar serve
-          codexbar serve --port 8080 --refresh-interval 60
+          burnbar serve
+          burnbar serve --port 8080 --refresh-interval 60
           curl http://127.0.0.1:8080/usage?provider=all
         """
     }
@@ -105,12 +105,12 @@ extension CodexBarCLI {
         Burnbar \(version)
 
         Usage:
-          codexbar burnbadge create --provider <codex|claude>
+          burnbar burnbadge create --provider <codex|claude>
                                     [--base-url <url>] [--name <name>] [--days <days>]
-          codexbar burnbadge sync --provider <codex|claude>
+          burnbar burnbadge sync --provider <codex|claude>
                                   [--base-url <url>] [--days <days>] [--refresh]
-          codexbar burnbadge markdown --provider <codex|claude> [--base-url <url>] [--days <days>]
-          codexbar burnbadge status --provider <codex|claude>
+          burnbar burnbadge markdown --provider <codex|claude> [--base-url <url>] [--days <days>]
+          burnbar burnbadge status --provider <codex|claude>
                                     [--base-url <url>] [--days <days>] [--format text|json]
 
         Description:
@@ -119,10 +119,10 @@ extension CodexBarCLI {
           Provider credentials are not sent to Burnbadge; only normalized daily spend totals are uploaded.
 
         Examples:
-          codexbar burnbadge create --provider codex --name "Codex README badge"
-          codexbar burnbadge sync --provider codex --days 30
-          codexbar burnbadge markdown --provider claude --days 30
-          codexbar burnbadge status --provider codex --format json --pretty
+          burnbar burnbadge create --provider codex --name "Codex README badge"
+          burnbar burnbadge sync --provider codex --days 30
+          burnbar burnbadge markdown --provider claude --days 30
+          burnbar burnbadge status --provider codex --format json --pretty
         """
     }
 
@@ -131,38 +131,38 @@ extension CodexBarCLI {
         CodexBar \(version)
 
         Usage:
-          codexbar config validate [--format text|json]
+          burnbar config validate [--format text|json]
                                  [--json]
                                  [--json-only]
                                  [--json-output] [--log-level <trace|verbose|debug|info|warning|error|critical>]
                                  [-v|--verbose]
                                  [--pretty]
-          codexbar config dump [--format text|json]
+          burnbar config dump [--format text|json]
                              [--json]
                              [--json-only]
                              [--json-output] [--log-level <trace|verbose|debug|info|warning|error|critical>]
                              [-v|--verbose]
                              [--pretty]
-          codexbar config providers [--format text|json] [--json] [--json-only] [--pretty]
-          codexbar config enable --provider <name> [--format text|json] [--json] [--json-only] [--pretty]
-          codexbar config disable --provider <name> [--format text|json] [--json] [--json-only] [--pretty]
-          codexbar config set-api-key --provider <name> (--api-key <key>|--stdin)
+          burnbar config providers [--format text|json] [--json] [--json-only] [--pretty]
+          burnbar config enable --provider <name> [--format text|json] [--json] [--json-only] [--pretty]
+          burnbar config disable --provider <name> [--format text|json] [--json] [--json-only] [--pretty]
+          burnbar config set-api-key --provider <name> (--api-key <key>|--stdin)
                                     [--no-enable]
                                     [--format text|json] [--json] [--json-only] [--pretty]
 
         Description:
-          Validate or print the CodexBar config file (default: validate).
+          Validate or print the Burnbar config file (default: validate).
           providers lists persistent provider enablement.
           enable/disable updates the same provider toggle used by Settings.
-          set-api-key stores a provider API key in ~/.codexbar/config.json and enables that provider by default.
+          set-api-key stores a provider API key in ~/.burnbar/config.json and enables that provider by default.
 
         Examples:
-          codexbar config validate --format json --pretty
-          codexbar config dump --pretty
-          codexbar config providers
-          codexbar config enable --provider grok
-          codexbar config disable --provider cursor
-          printf '%s' "$ELEVENLABS_API_KEY" | codexbar config set-api-key --provider elevenlabs --stdin
+          burnbar config validate --format json --pretty
+          burnbar config dump --pretty
+          burnbar config providers
+          burnbar config enable --provider grok
+          burnbar config disable --provider cursor
+          printf '%s' "$ELEVENLABS_API_KEY" | burnbar config set-api-key --provider elevenlabs --stdin
         """
     }
 
@@ -171,7 +171,7 @@ extension CodexBarCLI {
         CodexBar \(version)
 
         Usage:
-          codexbar cache clear <--cookies|--cost|--all>
+          burnbar cache clear <--cookies|--cost|--all>
                               [--provider <name>]
                               [--format text|json]
                               [--json]
@@ -186,11 +186,11 @@ extension CodexBarCLI {
           Optionally specify --provider with --cookies to clear cookies for a single provider only.
 
         Examples:
-          codexbar cache clear --cookies
-          codexbar cache clear --cookies --provider claude
-          codexbar cache clear --cost
-          codexbar cache clear --all
-          codexbar cache clear --all --format json --pretty
+          burnbar cache clear --cookies
+          burnbar cache clear --cookies --provider claude
+          burnbar cache clear --cost
+          burnbar cache clear --all
+          burnbar cache clear --all --format json --pretty
         """
     }
 
@@ -199,7 +199,7 @@ extension CodexBarCLI {
         CodexBar \(version)
 
         Usage:
-          codexbar [--format text|json]
+          burnbar [--format text|json]
                   [--json]
                   [--json-only]
                   [--json-output] [--log-level <trace|verbose|debug|info|warning|error|critical>] [-v|--verbose]
@@ -207,24 +207,24 @@ extension CodexBarCLI {
                   [--account <label>] [--account-index <index>] [--all-accounts]
                   [--no-credits] [--no-color] [--pretty] [--status] [--source <auto|web|cli|oauth|api>]
                   [--web-timeout <seconds>] [--web-debug-dump-html] [--antigravity-plan-debug] [--augment-debug]
-          codexbar cost [--format text|json]
+          burnbar cost [--format text|json]
                        [--json]
                        [--json-only]
                        [--json-output] [--log-level <trace|verbose|debug|info|warning|error|critical>] [-v|--verbose]
                        [--provider \(ProviderHelp.list)] [--no-color] [--pretty] [--refresh]
-          codexbar serve [--port <port>] [--refresh-interval <seconds>]
+          burnbar serve [--port <port>] [--refresh-interval <seconds>]
                        [--json-output] [--log-level <trace|verbose|debug|info|warning|error|critical>] [-v|--verbose]
-          codexbar burnbadge <create|sync|markdown|status> --provider <codex|claude>
-          codexbar config <validate|dump|providers> [--format text|json]
+          burnbar burnbadge <create|sync|markdown|status> --provider <codex|claude>
+          burnbar config <validate|dump|providers> [--format text|json]
                                         [--json]
                                         [--json-only]
                                         [--json-output] [--log-level <trace|verbose|debug|info|warning|error|critical>]
                                         [-v|--verbose]
                                         [--pretty]
-          codexbar config enable --provider <name>
-          codexbar config disable --provider <name>
-          codexbar config set-api-key --provider <name> (--api-key <key>|--stdin)
-          codexbar cache clear <--cookies|--cost|--all> [--provider <name>]
+          burnbar config enable --provider <name>
+          burnbar config disable --provider <name>
+          burnbar config set-api-key --provider <name> (--api-key <key>|--stdin)
+          burnbar cache clear <--cookies|--cost|--all> [--provider <name>]
 
         Global flags:
           -h, --help      Show help
@@ -235,18 +235,18 @@ extension CodexBarCLI {
           --json-output   Emit machine-readable logs (JSONL) to stderr
 
         Examples:
-          codexbar
-          codexbar --format json --provider all --pretty
-          codexbar --provider all --json
-          codexbar --provider gemini
-          codexbar cost --provider claude --format json --pretty
-          codexbar serve --port 8080
-          codexbar burnbadge create --provider codex --name "Codex README badge"
-          codexbar burnbadge sync --provider codex --days 30
-          codexbar config validate --format json --pretty
-          codexbar config enable --provider grok
-          codexbar config set-api-key --provider elevenlabs --stdin
-          codexbar cache clear --cookies
+          burnbar
+          burnbar --format json --provider all --pretty
+          burnbar --provider all --json
+          burnbar --provider gemini
+          burnbar cost --provider claude --format json --pretty
+          burnbar serve --port 8080
+          burnbar burnbadge create --provider codex --name "Codex README badge"
+          burnbar burnbadge sync --provider codex --days 30
+          burnbar config validate --format json --pretty
+          burnbar config enable --provider grok
+          burnbar config set-api-key --provider elevenlabs --stdin
+          burnbar cache clear --cookies
         """
     }
 }

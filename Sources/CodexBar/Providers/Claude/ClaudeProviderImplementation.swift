@@ -193,7 +193,7 @@ struct ClaudeProviderImplementation: ProviderImplementation {
             ProviderSettingsFieldDescriptor(
                 id: "claude-admin-api-key",
                 title: "Admin API key",
-                subtitle: "Stored in ~/.codexbar/config.json. Requires an Anthropic Admin API key.",
+                subtitle: "Stored in ~/.burnbar/config.json. Requires an Anthropic Admin API key.",
                 kind: .secure,
                 placeholder: "sk-ant-admin...",
                 binding: context.stringBinding(\.claudeAdminAPIKey),

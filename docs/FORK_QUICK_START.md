@@ -8,9 +8,9 @@ read_when:
 
 # CodexBar Fork - Quick Start Guide
 
-**Fork Maintainer:** Brandon Charleson ([topoffunnel.com](https://topoffunnel.com))  
+**Maintainer:** Mikael Moise  
 **Original Author:** Peter Steinberger ([steipete](https://twitter.com/steipete))  
-**Fork Repository:** https://github.com/topoffunnel/CodexBar
+**Repository:** https://github.com/arrismo/burnbar
 
 ---
 
@@ -209,7 +209,7 @@ swiftlint --strict
 1. Fork the fork repository
 2. Create feature branch
 3. Make changes with tests
-4. Submit PR to `topoffunnel/CodexBar`
+4. Submit PR to `arrismo/burnbar`
 
 ### To Upstream
 1. Check if feature benefits all users
@@ -224,8 +224,7 @@ See `docs/FORK_ROADMAP.md` for contribution strategy.
 ## 📞 Support
 
 ### Fork-Specific Issues
-- GitHub Issues: https://github.com/topoffunnel/CodexBar/issues
-- Email: [your-email]@topoffunnel.com
+- GitHub Issues: https://github.com/arrismo/burnbar/issues
 
 ### Upstream Issues
 - GitHub Issues: https://github.com/steipete/CodexBar/issues

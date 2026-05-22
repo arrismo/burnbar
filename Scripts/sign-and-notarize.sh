@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-APP_NAME="CodexBar"
+APP_NAME="Burnbar"
+PRODUCT_NAME="CodexBar"
 APP_IDENTITY="Developer ID Application: Peter Steinberger (Y5PE65HELJ)"
-APP_BUNDLE="CodexBar.app"
+APP_BUNDLE="Burnbar.app"
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 source "$ROOT/version.env"
 source "$ROOT/Scripts/release_artifacts.sh"
@@ -76,21 +77,21 @@ stapler validate "$APP_BUNDLE"
 echo "Packaging dSYM"
 FIRST_ARCH="${ARCH_LIST[0]}"
 PREFERRED_ARCH_DIR=".build/${FIRST_ARCH}-apple-macosx/release"
-DSYM_PATH="${PREFERRED_ARCH_DIR}/${APP_NAME}.dSYM"
+DSYM_PATH="${PREFERRED_ARCH_DIR}/${PRODUCT_NAME}.dSYM"
 if [[ ! -d "$DSYM_PATH" ]]; then
   echo "Missing dSYM at $DSYM_PATH" >&2
   exit 1
 fi
 if [[ ${#ARCH_LIST[@]} -gt 1 ]]; then
-  MERGED_DSYM_ROOT="${PREFERRED_ARCH_DIR}/${APP_NAME}.dSYM-universal"
-  MERGED_DSYM="${MERGED_DSYM_ROOT}/${APP_NAME}.dSYM"
+  MERGED_DSYM_ROOT="${PREFERRED_ARCH_DIR}/${PRODUCT_NAME}.dSYM-universal"
+  MERGED_DSYM="${MERGED_DSYM_ROOT}/${PRODUCT_NAME}.dSYM"
   rm -rf "$MERGED_DSYM_ROOT"
   mkdir -p "$MERGED_DSYM_ROOT"
   cp -R "$DSYM_PATH" "$MERGED_DSYM"
-  DWARF_PATH="${MERGED_DSYM}/Contents/Resources/DWARF/${APP_NAME}"
+  DWARF_PATH="${MERGED_DSYM}/Contents/Resources/DWARF/${PRODUCT_NAME}"
   BINARIES=()
   for ARCH in "${ARCH_LIST[@]}"; do
-    ARCH_DSYM=".build/${ARCH}-apple-macosx/release/${APP_NAME}.dSYM/Contents/Resources/DWARF/${APP_NAME}"
+    ARCH_DSYM=".build/${ARCH}-apple-macosx/release/${PRODUCT_NAME}.dSYM/Contents/Resources/DWARF/${PRODUCT_NAME}"
     if [[ ! -f "$ARCH_DSYM" ]]; then
       echo "Missing dSYM for ${ARCH} at $ARCH_DSYM" >&2
       exit 1
