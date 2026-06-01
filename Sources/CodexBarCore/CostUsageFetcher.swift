@@ -55,7 +55,7 @@ public struct CostUsageFetcher: Sendable {
             .Options? = nil) async throws -> CostUsageTokenSnapshot
     {
         guard provider == .codex || provider == .claude || provider == .vertexai || provider == .bedrock else {
-            throw CostUsageError.unsupportedProvider(provider)
+            return CostUsageTokenSnapshot.empty(provider: provider, historyDays: historyDays, now: now)
         }
 
         let until = now

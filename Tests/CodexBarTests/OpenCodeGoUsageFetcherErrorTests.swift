@@ -267,8 +267,12 @@ struct OpenCodeGoUsageFetcherErrorTests {
             workspaceIDOverride: "wrk_TEST123",
             session: self.makeSession())
 
+        // zenBalanceUSD is still fetched separately
         #expect(snapshot.zenBalanceUSD == 98.76)
-        #expect(snapshot.toUsageSnapshot().providerCost?.period == "Zen balance")
+        // providerCost now uses derived Go plan cost (17% × $12)
+        #expect(snapshot.toUsageSnapshot().providerCost?.period == "5-hour")
+        #expect(abs(snapshot.toUsageSnapshot().providerCost?.used ?? 0 - 2.04) < 0.001)
+        #expect(snapshot.toUsageSnapshot().providerCost?.limit == OpenCodeGoLimits.rollingUSD)
     }
 
     @Test

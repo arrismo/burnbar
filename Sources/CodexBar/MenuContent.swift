@@ -31,8 +31,8 @@ struct MenuContent: View {
                 }
             }
         }
-        .padding(.horizontal, 10)
-        .padding(.vertical, 6)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 8)
         .frame(minWidth: 260, alignment: .leading)
     }
 
@@ -136,6 +136,8 @@ struct MenuContent: View {
             }
         case .settings:
             self.actions.openSettings()
+        case .createBurnbadge:
+            self.actions.openBurnbadge()
         case .about:
             self.actions.openAbout()
         case .quit:
@@ -157,6 +159,7 @@ struct MenuActions {
     let switchAccount: (UsageProvider) -> Void
     let openTerminal: (String) -> Void
     let openSettings: () -> Void
+    let openBurnbadge: () -> Void
     let openAbout: () -> Void
     let quit: () -> Void
     let copyError: (String) -> Void

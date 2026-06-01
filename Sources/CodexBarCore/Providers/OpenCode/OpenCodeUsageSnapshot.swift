@@ -7,6 +7,16 @@ public struct OpenCodeUsageSnapshot: Sendable {
     public let weeklyResetInSec: Int
     public let updatedAt: Date
 
+    /// Derived cost from percentage × Go plan dollar limits.
+    public var rollingCostUSD: Double {
+        self.rollingUsagePercent / 100 * OpenCodeGoLimits.rollingUSD
+    }
+
+    /// Derived cost from percentage × Go plan dollar limits.
+    public var weeklyCostUSD: Double {
+        self.weeklyUsagePercent / 100 * OpenCodeGoLimits.weeklyUSD
+    }
+
     public init(
         rollingUsagePercent: Double,
         weeklyUsagePercent: Double,
@@ -39,6 +49,13 @@ public struct OpenCodeUsageSnapshot: Sendable {
         return UsageSnapshot(
             primary: primary,
             secondary: secondary,
+            providerCost: ProviderCostSnapshot(
+                used: self.rollingCostUSD,
+                limit: OpenCodeGoLimits.rollingUSD,
+                currencyCode: "USD",
+                period: "5-hour",
+                resetsAt: rollingReset,
+                updatedAt: self.updatedAt),
             updatedAt: self.updatedAt,
             identity: nil)
     }

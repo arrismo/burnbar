@@ -44,3 +44,6 @@ docs/.astro/
 
 # Burnbar app bundle
 Burnbar.app/
+
+# Codebase wiki — compiled artifact, regenerated from source
+.codebase-wiki/

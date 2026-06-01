@@ -240,6 +240,10 @@ extension StatusItemController: StatusItemMenuPersistentActionDelegate {
         self.openSettings(tab: .general)
     }
 
+    @objc func showSettingsBurnbadge() {
+        self.openSettings(tab: .burnbadge)
+    }
+
     @objc func showSettingsAbout() {
         self.openSettings(tab: .about)
     }

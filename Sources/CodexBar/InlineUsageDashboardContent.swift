@@ -560,7 +560,7 @@ struct InlineUsageDashboardContent: View {
             let maxValue = max(self.model.points.map(\.value).max() ?? 0, 1)
             HStack(alignment: .bottom, spacing: 2) {
                 ForEach(self.model.points) { point in
-                    RoundedRectangle(cornerRadius: 1.5, style: .continuous)
+                    RoundedRectangle(cornerRadius: 2, style: .continuous)
                         .fill(self.fill(for: point, maxValue: maxValue))
                         .frame(maxWidth: .infinity)
                         .frame(height: self.height(for: point, maxValue: maxValue))
@@ -588,9 +588,9 @@ struct InlineUsageDashboardContent: View {
             }
             switch self.model.valueStyle {
             case .currencyUSD, .currency:
-                return Color(red: 0.81, green: 0.56, blue: 0.24).opacity(0.42 + ratio * 0.58)
+                return Color(red: 0.20, green: 0.70, blue: 0.65).opacity(0.42 + ratio * 0.58)
             case .tokens:
-                return Color(red: 0.48, green: 0.41, blue: 0.86).opacity(0.42 + ratio * 0.58)
+                return Color(red: 0.35, green: 0.52, blue: 0.85).opacity(0.42 + ratio * 0.58)
             }
         }
     }

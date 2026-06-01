@@ -269,14 +269,19 @@ struct BurnbadgePane: View {
         defer { self.isWorking = false }
 
         do {
-            let snapshot = try await CostUsageFetcher().loadTokenSnapshot(
-                provider: provider,
-                forceRefresh: true,
-                historyDays: self.days,
-                refreshPricingInBackground: false)
-            let usage = BurnbadgeUsageAdapter.dailyUsage(from: snapshot)
+            let usage: [BurnbadgeDailyUsage]
+            if provider == .opencode || provider == .opencodego {
+                usage = try await self.syncOpenCodeProject(provider: provider)
+            } else {
+                let snapshot = try await CostUsageFetcher().loadTokenSnapshot(
+                    provider: provider,
+                    forceRefresh: true,
+                    historyDays: self.days,
+                    refreshPricingInBackground: false)
+                usage = BurnbadgeUsageAdapter.dailyUsage(from: snapshot)
+            }
             guard !usage.isEmpty else {
-                self.errorMessage = "No daily cost usage found for \(Self.displayName(for: provider))."
+                self.errorMessage = "No daily cost data found for \(Self.displayName(for: provider))."
                 return
             }
 
@@ -293,6 +298,53 @@ struct BurnbadgePane: View {
         } catch {
             self.errorMessage = "Sync failed: \(error.localizedDescription)"
         }
+    }
+
+    /// Derives cost from OpenCode subscription percentage × Go plan dollar limits.
+    /// Publishes today's cost as a single daily entry (accumulates over time with repeated syncs).
+    private func syncOpenCodeProject(provider: UsageProvider) async throws -> [BurnbadgeDailyUsage] {
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withFullDate]
+        let today = dateFormatter.string(from: Date())
+
+        let cost: Double
+        if provider == .opencodego {
+            let cookieHeader = try self.resolveOpenCodeCookie(provider: provider)
+            let usageSnapshot = try await OpenCodeGoUsageFetcher.fetchUsage(
+                cookieHeader: cookieHeader,
+                timeout: 30)
+            cost = usageSnapshot.rollingCostUSD
+        } else {
+            let cookieHeader = try self.resolveOpenCodeCookie(provider: provider)
+            let workspaceOverride = self.settings.opencodeWorkspaceID
+            let usageSnapshot = try await OpenCodeUsageFetcher.fetchUsage(
+                cookieHeader: cookieHeader,
+                timeout: 30,
+                workspaceIDOverride: workspaceOverride)
+            cost = usageSnapshot.rollingCostUSD
+        }
+
+        guard cost > 0 else { return [] }
+        return [BurnbadgeDailyUsage(date: today, cost: cost)]
+    }
+
+    private func resolveOpenCodeCookie(provider: UsageProvider) throws -> String {
+        let cookieSource = provider == .opencodego
+            ? self.settings.opencodegoCookieSource
+            : self.settings.opencodeCookieSource
+        if cookieSource == .manual {
+            let header = provider == .opencodego
+                ? self.settings.opencodegoCookieHeader
+                : self.settings.opencodeCookieHeader
+            guard !header.isEmpty else {
+                throw OpenCodeUsageError.invalidCredentials
+            }
+            return header
+        }
+        guard let entry = CookieHeaderCache.load(provider: provider) else {
+            throw OpenCodeUsageError.invalidCredentials
+        }
+        return entry.cookieHeader
     }
 
     private func markdown(for project: BurnbarProjectConfig) -> String {

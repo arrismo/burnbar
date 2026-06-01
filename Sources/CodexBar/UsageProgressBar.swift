@@ -79,7 +79,7 @@ struct UsageProgressBar: View {
 
             if !markerPercents.isEmpty {
                 let markerWidth = max(1 / scale, 2)
-                let markerColor: Color = self.isHighlighted ? .white : .primary.opacity(0.72)
+                let markerColor: Color = self.isHighlighted ? .white : .primary.opacity(0.50)
                 for markerPercent in markerPercents {
                     let x = size.width * markerPercent / 100
                     let markerRect = CGRect(
@@ -116,7 +116,7 @@ struct UsageProgressBar: View {
                 context.fill(stripes.center.applying(shift), with: .color(stripeColor))
             }
         }
-        .frame(height: 6)
+        .frame(height: 10)
         .accessibilityLabel(self.accessibilityLabel)
         .accessibilityValue("\(Int(self.clamped)) percent")
     }

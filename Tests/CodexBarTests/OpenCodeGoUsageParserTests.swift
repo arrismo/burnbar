@@ -167,24 +167,25 @@ struct OpenCodeGoUsageParserTests {
     }
 
     @Test
-    func `snapshot exposes zen balance as provider cost`() {
+    func `snapshot derives cost from percentage × Go plan dollar limits`() {
         let now = Date(timeIntervalSince1970: 1_700_000_000)
         let snapshot = OpenCodeGoUsageSnapshot(
             hasMonthlyUsage: false,
-            rollingUsagePercent: 10,
-            weeklyUsagePercent: 20,
+            rollingUsagePercent: 10,   // 10% of $12 = $1.20
+            weeklyUsagePercent: 20,    // 20% of $30 = $6.00
             monthlyUsagePercent: 0,
             rollingResetInSec: 600,
             weeklyResetInSec: 3600,
             monthlyResetInSec: 0,
-            zenBalanceUSD: 12.34,
+            zenBalanceUSD: 99.99,  // no longer used for providerCost
             updatedAt: now)
 
         let usage = snapshot.toUsageSnapshot()
 
-        #expect(usage.providerCost?.period == "Zen balance")
-        #expect(usage.providerCost?.used == 12.34)
-        #expect(usage.providerCost?.limit == 0)
+        // cost is derived from rolling percent × $12 limit
+        #expect(usage.providerCost?.period == "5-hour")
+        #expect(abs(usage.providerCost?.used ?? 0 - 1.20) < 0.001)
+        #expect(usage.providerCost?.limit == OpenCodeGoLimits.rollingUSD)
         #expect(usage.providerCost?.currencyCode == "USD")
     }
 
@@ -291,5 +292,21 @@ struct OpenCodeGoUsageParserTests {
         #expect(throws: OpenCodeGoUsageError.self) {
             _ = try OpenCodeGoUsageFetcher.parseSubscription(text: text, now: now)
         }
+    }
+
+    @Test
+    func `derives cost from percentage × Go plan dollar limits`() throws {
+        let text = "$R[16]($R[30],$R[41]={rollingUsage:$R[42]={status:\"ok\",resetInSec:5944,usagePercent:17}," +
+            "weeklyUsage:$R[43]={status:\"ok\",resetInSec:278201,usagePercent:75}," +
+            "monthlyUsage:$R[44]={status:\"ok\",resetInSec:880201,usagePercent:91}});"
+        let now = Date(timeIntervalSince1970: 0)
+        let snapshot = try OpenCodeGoUsageFetcher.parseSubscription(text: text, now: now)
+
+        // 17% of $12 = $2.04
+        #expect(abs(snapshot.rollingCostUSD - 2.04) < 0.001)
+        // 75% of $30 = $22.50
+        #expect(abs(snapshot.weeklyCostUSD - 22.50) < 0.001)
+        // 91% of $60 = $54.60
+        #expect(abs(snapshot.monthlyCostUSD - 54.60) < 0.001)
     }
 }

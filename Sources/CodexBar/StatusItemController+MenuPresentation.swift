@@ -150,12 +150,16 @@ struct MenuCardSectionContainerView<Content: View>: View {
             .environment(\.menuItemHighlighted, self.highlightState.isHighlighted)
             .foregroundStyle(MenuHighlightStyle.primary(self.highlightState.isHighlighted))
             .background(alignment: .topLeading) {
-                if self.highlightState.isHighlighted {
-                    RoundedRectangle(cornerRadius: 6, style: .continuous)
-                        .fill(MenuHighlightStyle.selectionBackground(true))
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 2)
-                }
+                RoundedRectangle(cornerRadius: 18, style: .continuous)
+                    .fill(self.cardBackground)
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 2)
+            }
+            .overlay {
+                RoundedRectangle(cornerRadius: 18, style: .continuous)
+                    .strokeBorder(Color.orange.opacity(self.highlightState.isHighlighted ? 0.42 : 0.16), lineWidth: 1)
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 2)
             }
             .overlay(alignment: self.submenuIndicatorAlignment) {
                 if self.showsSubmenuIndicator {
@@ -166,6 +170,16 @@ struct MenuCardSectionContainerView<Content: View>: View {
                         .padding(.trailing, 10)
                 }
             }
+    }
+
+    private var cardBackground: some ShapeStyle {
+        LinearGradient(
+            colors: [
+                Color.orange.opacity(self.highlightState.isHighlighted ? 0.30 : 0.10),
+                Color(nsColor: .controlBackgroundColor).opacity(self.highlightState.isHighlighted ? 0.14 : 0.34),
+            ],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing)
     }
 }
 

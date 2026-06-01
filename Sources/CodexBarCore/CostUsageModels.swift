@@ -26,6 +26,17 @@ public struct CostUsageTokenSnapshot: Sendable, Equatable {
         self.daily = daily
         self.updatedAt = updatedAt
     }
+
+    public static func empty(provider: UsageProvider, historyDays: Int, now: Date) -> CostUsageTokenSnapshot {
+        CostUsageTokenSnapshot(
+            sessionTokens: nil,
+            sessionCostUSD: nil,
+            last30DaysTokens: nil,
+            last30DaysCostUSD: nil,
+            historyDays: historyDays,
+            daily: [],
+            updatedAt: now)
+    }
 }
 
 public struct CostUsageDailyReport: Sendable, Decodable {

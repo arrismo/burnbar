@@ -112,4 +112,33 @@ struct OpenCodeUsageParserTests {
             _ = try OpenCodeUsageFetcher.parseSubscription(text: text, now: now)
         }
     }
+
+    @Test
+    func `derives cost from percentage × Go plan dollar limits`() throws {
+        let text = "$R[16]($R[30],$R[41]={rollingUsage:$R[42]={status:\"ok\",resetInSec:5944,usagePercent:17}," +
+            "weeklyUsage:$R[43]={status:\"ok\",resetInSec:278201,usagePercent:75}});"
+        let now = Date(timeIntervalSince1970: 0)
+        let snapshot = try OpenCodeUsageFetcher.parseSubscription(text: text, now: now)
+
+        // 17% of $12 = $2.04
+        #expect(abs(snapshot.rollingCostUSD - 2.04) < 0.001)
+        // 75% of $30 = $22.50
+        #expect(abs(snapshot.weeklyCostUSD - 22.50) < 0.001)
+    }
+
+    @Test
+    func `snapshot toUsageSnapshot includes provider cost`() throws {
+        let text = "$R[16]($R[30],$R[41]={rollingUsage:$R[42]={status:\"ok\",resetInSec:3600,usagePercent:50}," +
+            "weeklyUsage:$R[43]={status:\"ok\",resetInSec:86400,usagePercent:0}});"
+        let now = Date(timeIntervalSince1970: 1_700_000_000)
+        let snapshot = try OpenCodeUsageFetcher.parseSubscription(text: text, now: now)
+        let usage = snapshot.toUsageSnapshot()
+
+        #expect(usage.providerCost != nil)
+        #expect(abs(usage.providerCost?.used ?? 0 - 6.00) < 0.001)  // 50% × $12
+        #expect(usage.providerCost?.limit == OpenCodeGoLimits.rollingUSD)
+        #expect(usage.providerCost?.period == "5-hour")
+        #expect(usage.providerCost?.currencyCode == "USD")
+        #expect(usage.providerCost?.resetsAt != nil)
+    }
 }

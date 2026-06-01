@@ -29,19 +29,20 @@ struct MenuDescriptor {
     }
 
     enum MenuActionSystemImage: String {
-        case refresh = "arrow.clockwise"
-        case dashboard = "chart.bar"
-        case statusPage = "waveform.path.ecg"
-        case changelog = "list.bullet.rectangle"
-        case addAccount = "plus"
-        case systemAccount = "person.crop.circle"
-        case switchAccount = "key"
-        case openTerminal = "terminal"
-        case loginToProvider = "arrow.right.square"
-        case settings = "gearshape"
-        case about = "info.circle"
-        case quit = "xmark.rectangle"
-        case copyError = "doc.on.doc"
+        case burnbadge = "flame.fill"
+        case refresh = "arrow.clockwise.circle.fill"
+        case dashboard = "chart.bar.fill"
+        case statusPage = "waveform.path.ecg.rectangle.fill"
+        case changelog = "list.bullet.rectangle.fill"
+        case addAccount = "plus.circle.fill"
+        case systemAccount = "person.crop.circle.fill"
+        case switchAccount = "key.fill"
+        case openTerminal = "terminal.fill"
+        case loginToProvider = "arrow.right.square.fill"
+        case settings = "gearshape.fill"
+        case about = "info.circle.fill"
+        case quit = "xmark.rectangle.fill"
+        case copyError = "doc.on.doc.fill"
     }
 
     enum TextStyle {
@@ -52,6 +53,7 @@ struct MenuDescriptor {
 
     enum MenuAction: Equatable {
         case installUpdate
+        case createBurnbadge
         case refresh
         case refreshAugmentSession
         case dashboard
@@ -574,6 +576,7 @@ struct MenuDescriptor {
             entries.append(.action("Update ready, restart now?", .installUpdate))
         }
         entries.append(contentsOf: [
+            .action("Create Burnbadge", .createBurnbadge),
             .action("Refresh", .refresh),
             .action("Settings...", .settings),
             .action(L("menu_about"), .about),
@@ -684,6 +687,7 @@ extension MenuDescriptor.MenuAction {
         switch self {
         case .installUpdate, .settings, .about, .quit:
             nil
+        case .createBurnbadge: MenuDescriptor.MenuActionSystemImage.burnbadge.rawValue
         case .refresh: MenuDescriptor.MenuActionSystemImage.refresh.rawValue
         case .refreshAugmentSession: MenuDescriptor.MenuActionSystemImage.refresh.rawValue
         case .dashboard: MenuDescriptor.MenuActionSystemImage.dashboard.rawValue

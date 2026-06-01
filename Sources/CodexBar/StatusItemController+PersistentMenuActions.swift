@@ -3,7 +3,7 @@ import AppKit
 extension StatusItemController {
     func usesPersistentMenuActionItem(for action: MenuDescriptor.MenuAction) -> Bool {
         switch action {
-        case .installUpdate, .refresh, .settings, .about, .quit:
+        case .installUpdate, .createBurnbadge, .refresh, .settings, .about, .quit:
             true
         default:
             false
@@ -14,6 +14,8 @@ extension StatusItemController {
         switch action {
         case .installUpdate:
             "arrow.down.circle"
+        case .createBurnbadge:
+            MenuDescriptor.MenuActionSystemImage.burnbadge.rawValue
         case .refresh:
             MenuDescriptor.MenuActionSystemImage.refresh.rawValue
         case .settings:
@@ -34,6 +36,9 @@ extension StatusItemController {
         case .installUpdate:
             self.closeMenuForPersistentAction(menu)
             self.installUpdate()
+        case .createBurnbadge:
+            self.closeMenuForPersistentAction(menu)
+            self.showSettingsBurnbadge()
         case .settings:
             self.closeMenuForPersistentAction(menu)
             self.showSettingsGeneral()

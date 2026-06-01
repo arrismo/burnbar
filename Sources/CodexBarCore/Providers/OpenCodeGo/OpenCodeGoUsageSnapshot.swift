@@ -1,5 +1,12 @@
 import Foundation
 
+/// OpenCode subscription Go plan dollar limits (see opencode.ai/docs/go).
+public enum OpenCodeGoLimits {
+    public static let rollingUSD: Double = 12 // 5-hour window
+    public static let weeklyUSD: Double = 30
+    public static let monthlyUSD: Double = 60
+}
+
 public struct OpenCodeGoUsageSnapshot: Sendable {
     public let hasMonthlyUsage: Bool
     public let rollingUsagePercent: Double
@@ -10,6 +17,21 @@ public struct OpenCodeGoUsageSnapshot: Sendable {
     public let monthlyResetInSec: Int
     public let zenBalanceUSD: Double?
     public let updatedAt: Date
+
+    /// Derived cost from percentage × Go plan dollar limits.
+    public var rollingCostUSD: Double {
+        self.rollingUsagePercent / 100 * OpenCodeGoLimits.rollingUSD
+    }
+
+    /// Derived cost from percentage × Go plan dollar limits.
+    public var weeklyCostUSD: Double {
+        self.weeklyUsagePercent / 100 * OpenCodeGoLimits.weeklyUSD
+    }
+
+    /// Derived cost from percentage × Go plan dollar limits.
+    public var monthlyCostUSD: Double {
+        self.monthlyUsagePercent / 100 * OpenCodeGoLimits.monthlyUSD
+    }
 
     public init(
         hasMonthlyUsage: Bool,
@@ -63,14 +85,13 @@ public struct OpenCodeGoUsageSnapshot: Sendable {
             primary: primary,
             secondary: secondary,
             tertiary: tertiary,
-            providerCost: self.zenBalanceUSD.map {
-                ProviderCostSnapshot(
-                    used: $0,
-                    limit: 0,
-                    currencyCode: "USD",
-                    period: "Zen balance",
-                    updatedAt: self.updatedAt)
-            },
+            providerCost: ProviderCostSnapshot(
+                used: self.rollingCostUSD,
+                limit: OpenCodeGoLimits.rollingUSD,
+                currencyCode: "USD",
+                period: "5-hour",
+                resetsAt: rollingReset,
+                updatedAt: self.updatedAt),
             updatedAt: self.updatedAt,
             identity: nil)
     }

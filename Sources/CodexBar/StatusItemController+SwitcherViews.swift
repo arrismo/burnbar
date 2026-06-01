@@ -29,7 +29,7 @@ final class ProviderSwitcherView: NSView {
     private var quotaIndicators: [ObjectIdentifier: QuotaIndicator] = [:]
     private var hoverTrackingArea: NSTrackingArea?
     private var segmentWidths: [CGFloat] = []
-    private let selectedBackground = NSColor.controlAccentColor.cgColor
+    private let selectedBackground = NSColor.systemOrange.withAlphaComponent(0.92).cgColor
     private let unselectedBackground = NSColor.clear.cgColor
     private let selectedTextColor = NSColor.white
     private let unselectedTextColor = NSColor.secondaryLabelColor
@@ -41,7 +41,7 @@ final class ProviderSwitcherView: NSView {
     private var hoveredButtonTag: Int?
     private var pressedButtonTag: Int?
     private let lightModeOverlayLayer = CALayer()
-    private static let quotaIndicatorHeight: CGFloat = 3
+    private static let quotaIndicatorHeight: CGFloat = 2
     private static let quotaIndicatorBottomInset: CGFloat = 2
     private static let quotaIndicatorHorizontalInset: CGFloat = 8
     private static let quotaIndicatorContentGap: CGFloat = 3
@@ -178,7 +178,7 @@ final class ProviderSwitcherView: NSView {
             button.contentTintColor = self.unselectedTextColor
             button.alignment = .center
             button.wantsLayer = true
-            button.layer?.cornerRadius = 6
+            button.layer?.cornerRadius = 10
             button.state = (selected == segment.selection) ? .on : .off
             button.toolTip = nil
             button.translatesAutoresizingMaskIntoConstraints = false
@@ -698,9 +698,9 @@ final class ProviderSwitcherView: NSView {
 
     private func hoverPlateColor() -> CGColor {
         if self.isLightMode() {
-            return NSColor.black.withAlphaComponent(0.095).cgColor
+            return NSColor.black.withAlphaComponent(0.045).cgColor
         }
-        return NSColor.labelColor.withAlphaComponent(0.06).cgColor
+        return NSColor.labelColor.withAlphaComponent(0.03).cgColor
     }
 
     /// Cache for button width measurements to avoid repeated layout passes.
@@ -875,7 +875,7 @@ final class ProviderSwitcherView: NSView {
     }
 
     private static func overviewIcon() -> NSImage {
-        if let symbol = NSImage(systemSymbolName: "square.grid.2x2", accessibilityDescription: nil) {
+        if let symbol = NSImage(systemSymbolName: "chart.pie", accessibilityDescription: nil) {
             return symbol
         }
         return NSImage(size: NSSize(width: 16, height: 16))
@@ -1012,9 +1012,9 @@ final class TokenAccountSwitcherView: NSView {
     private let preferredSize: NSSize
     private let rowSpacing: CGFloat = 4
     private let rowHeight: CGFloat = 26
-    private let selectedBackground = NSColor.controlAccentColor.cgColor
+    private let selectedBackground = NSColor.clear.cgColor
     private let unselectedBackground = NSColor.clear.cgColor
-    private let selectedTextColor = NSColor.white
+    private let selectedTextColor = NSColor.controlAccentColor
     private let unselectedTextColor = NSColor.secondaryLabelColor
 
     init(
@@ -1087,7 +1087,7 @@ final class TokenAccountSwitcherView: NSView {
                 button.cell?.lineBreakMode = account.displayName.contains("@") ? .byTruncatingMiddle : .byTruncatingTail
                 button.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
                 button.wantsLayer = true
-                button.layer?.cornerRadius = 6
+                button.layer?.cornerRadius = 4
                 row.addArrangedSubview(button)
                 self.buttons.append(button)
                 globalIndex += 1
@@ -1150,9 +1150,9 @@ final class CodexAccountSwitcherView: NSView {
     private let preferredSize: NSSize
     private let rowSpacing: CGFloat = 4
     private let rowHeight: CGFloat = 26
-    private let selectedBackground = NSColor.controlAccentColor.cgColor
+    private let selectedBackground = NSColor.clear.cgColor
     private let unselectedBackground = NSColor.clear.cgColor
-    private let selectedTextColor = NSColor.white
+    private let selectedTextColor = NSColor.controlAccentColor
     private let unselectedTextColor = NSColor.secondaryLabelColor
     private let buttonFont = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
     private let buttonHorizontalPadding: CGFloat = 14
@@ -1228,7 +1228,7 @@ final class CodexAccountSwitcherView: NSView {
                 button.cell?.lineBreakMode = .byTruncatingTail
                 button.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
                 button.wantsLayer = true
-                button.layer?.cornerRadius = 6
+                button.layer?.cornerRadius = 4
                 row.addArrangedSubview(button)
                 self.buttons.append(button)
             }

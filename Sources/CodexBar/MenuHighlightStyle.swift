@@ -22,7 +22,7 @@ enum MenuHighlightStyle {
     }
 
     static func progressTrack(_ highlighted: Bool) -> Color {
-        highlighted ? self.selectionText.opacity(0.22) : Color(nsColor: .tertiaryLabelColor).opacity(0.22)
+        highlighted ? self.selectionText.opacity(0.22) : Color.orange.opacity(0.12)
     }
 
     static func progressTint(_ highlighted: Bool, fallback: Color) -> Color {
