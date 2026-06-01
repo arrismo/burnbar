@@ -171,13 +171,13 @@ struct OpenCodeGoUsageParserTests {
         let now = Date(timeIntervalSince1970: 1_700_000_000)
         let snapshot = OpenCodeGoUsageSnapshot(
             hasMonthlyUsage: false,
-            rollingUsagePercent: 10,   // 10% of $12 = $1.20
-            weeklyUsagePercent: 20,    // 20% of $30 = $6.00
+            rollingUsagePercent: 10, // 10% of $12 = $1.20
+            weeklyUsagePercent: 20, // 20% of $30 = $6.00
             monthlyUsagePercent: 0,
             rollingResetInSec: 600,
             weeklyResetInSec: 3600,
             monthlyResetInSec: 0,
-            zenBalanceUSD: 99.99,  // no longer used for providerCost
+            zenBalanceUSD: 99.99, // no longer used for providerCost
             updatedAt: now)
 
         let usage = snapshot.toUsageSnapshot()

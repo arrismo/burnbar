@@ -135,7 +135,7 @@ struct OpenCodeUsageParserTests {
         let usage = snapshot.toUsageSnapshot()
 
         #expect(usage.providerCost != nil)
-        #expect(abs(usage.providerCost?.used ?? 0 - 6.00) < 0.001)  // 50% × $12
+        #expect(abs(usage.providerCost?.used ?? 0 - 6.00) < 0.001) // 50% × $12
         #expect(usage.providerCost?.limit == OpenCodeGoLimits.rollingUSD)
         #expect(usage.providerCost?.period == "5-hour")
         #expect(usage.providerCost?.currencyCode == "USD")
