@@ -576,7 +576,7 @@ struct MenuDescriptor {
             entries.append(.action("Update ready, restart now?", .installUpdate))
         }
         entries.append(contentsOf: [
-            .action("Create Burnbadge", .createBurnbadge),
+            .action("Burnbadge Studio...", .createBurnbadge),
             .action("Refresh", .refresh),
             .action("Settings...", .settings),
             .action(L("menu_about"), .about),

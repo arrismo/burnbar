@@ -157,7 +157,9 @@ struct MenuCardSectionContainerView<Content: View>: View {
             }
             .overlay {
                 RoundedRectangle(cornerRadius: 18, style: .continuous)
-                    .strokeBorder(Color.orange.opacity(self.highlightState.isHighlighted ? 0.42 : 0.16), lineWidth: 1)
+                    .strokeBorder(
+                        MenuHighlightStyle.secondary(self.highlightState.isHighlighted).opacity(0.14),
+                        lineWidth: 1)
                     .padding(.horizontal, 6)
                     .padding(.vertical, 2)
             }
@@ -173,13 +175,8 @@ struct MenuCardSectionContainerView<Content: View>: View {
     }
 
     private var cardBackground: some ShapeStyle {
-        LinearGradient(
-            colors: [
-                Color.orange.opacity(self.highlightState.isHighlighted ? 0.30 : 0.10),
-                Color(nsColor: .controlBackgroundColor).opacity(self.highlightState.isHighlighted ? 0.14 : 0.34),
-            ],
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing)
+        Color(nsColor: .controlBackgroundColor)
+            .opacity(self.highlightState.isHighlighted ? 0.30 : 0.18)
     }
 }
 

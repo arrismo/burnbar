@@ -668,6 +668,9 @@ extension StatusItemController {
     {
         self.store.refreshStorageFootprintsForOverview()
         if switcherSelection == .overview {
+            self.addBurnbadgeHero(to: menu, width: context.menuWidth)
+            menu.addItem(.separator())
+
             let enabledProviders = self.store.enabledProvidersForDisplay()
             if self.addOverviewRows(
                 to: menu,

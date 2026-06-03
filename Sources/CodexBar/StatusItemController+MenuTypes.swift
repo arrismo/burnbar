@@ -20,40 +20,163 @@ struct OverviewMenuCardRowView: View {
     @Environment(\.menuItemHighlighted) private var isHighlighted
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            UsageMenuCardHeaderSectionView(
-                model: self.model,
-                showDivider: self.hasUsageBlock,
-                width: self.width)
-            if self.hasUsageBlock {
-                UsageMenuCardUsageSectionView(
-                    model: self.model,
-                    showBottomDivider: false,
-                    bottomPadding: 6,
-                    width: self.width)
-            }
-            if let storageText {
-                HStack(alignment: .firstTextBaseline, spacing: 4) {
-                    Text("Storage:")
-                        .font(.footnote)
-                        .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))
-                    Text(storageText)
-                        .font(.footnote)
-                        .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))
-                        .lineLimit(1)
-                    Spacer()
+        VStack(alignment: .leading, spacing: 10) {
+            self.header
+
+            if !self.model.metrics.isEmpty {
+                HStack(spacing: 8) {
+                    ForEach(Array(self.model.metrics.prefix(2)), id: \.id) { metric in
+                        OverviewMetricChip(
+                            metric: metric,
+                            title: UsageMenuCardView.popupMetricTitle(provider: self.model.provider, metric: metric),
+                            tint: self.model.progressColor)
+                    }
                 }
-                .padding(.horizontal, 16)
-                .padding(.top, self.hasUsageBlock ? 0 : 8)
-                .padding(.bottom, 6)
-                .frame(width: self.width, alignment: .leading)
+            }
+
+            if !self.dashboardStats.isEmpty || self.storageText != nil {
+                self.footer
             }
         }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 11)
         .frame(width: self.width, alignment: .leading)
     }
 
-    private var hasUsageBlock: Bool {
-        self.model.hasUsageContent
+    private var header: some View {
+        HStack(alignment: .center, spacing: 10) {
+            Image(systemName: "flame.fill")
+                .font(.system(size: 13, weight: .bold))
+                .foregroundStyle(.orange)
+                .frame(width: 26, height: 26)
+                .background(Circle().fill(Color.orange.opacity(self.isHighlighted ? 0.24 : 0.15)))
+
+            VStack(alignment: .leading, spacing: 2) {
+                HStack(alignment: .firstTextBaseline, spacing: 6) {
+                    Text(self.model.providerName)
+                        .font(.subheadline.weight(.bold))
+                        .foregroundStyle(MenuHighlightStyle.primary(self.isHighlighted))
+                        .lineLimit(1)
+
+                    Text("source")
+                        .font(.caption2.weight(.bold))
+                        .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
+                        .background {
+                            Capsule(style: .continuous)
+                                .fill(MenuHighlightStyle.secondary(self.isHighlighted).opacity(0.12))
+                        }
+
+                    Spacer(minLength: 4)
+
+                    if let plan = self.model.planText {
+                        Text(plan)
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))
+                            .lineLimit(1)
+                    }
+                }
+
+                HStack(spacing: 5) {
+                    Text(self.model.subtitleText)
+                        .font(.caption)
+                        .foregroundStyle(self.subtitleColor)
+                        .lineLimit(1)
+                    if !self.model.email.isEmpty {
+                        Text("·")
+                            .font(.caption)
+                            .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))
+                        Text(self.model.email)
+                            .font(.caption)
+                            .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))
+                            .lineLimit(1)
+                            .truncationMode(.middle)
+                    }
+                }
+            }
+        }
+    }
+
+    private var footer: some View {
+        HStack(alignment: .firstTextBaseline, spacing: 10) {
+            ForEach(self.dashboardStats, id: \.title) { stat in
+                VStack(alignment: .leading, spacing: 1) {
+                    Text(stat.title)
+                        .font(.caption2)
+                        .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))
+                        .lineLimit(1)
+                    Text(stat.value)
+                        .font(.caption.weight(.bold))
+                        .foregroundStyle(MenuHighlightStyle.primary(self.isHighlighted))
+                        .lineLimit(1)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+
+            if let storageText {
+                Text(storageText)
+                    .font(.caption2)
+                    .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))
+                    .lineLimit(1)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+            }
+        }
+    }
+
+    private var dashboardStats: [InlineUsageDashboardModel.KPI] {
+        Array((self.model.inlineUsageDashboard?.kpis ?? []).prefix(3))
+    }
+
+    private var subtitleColor: Color {
+        switch self.model.subtitleStyle {
+        case .info, .loading:
+            MenuHighlightStyle.secondary(self.isHighlighted)
+        case .error:
+            MenuHighlightStyle.error(self.isHighlighted)
+        }
+    }
+}
+
+private struct OverviewMetricChip: View {
+    let metric: UsageMenuCardView.Model.Metric
+    let title: String
+    let tint: Color
+    @Environment(\.menuItemHighlighted) private var isHighlighted
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 5) {
+            HStack(alignment: .firstTextBaseline, spacing: 4) {
+                Text(self.title)
+                    .font(.caption.weight(.semibold))
+                    .lineLimit(1)
+                Spacer(minLength: 4)
+                Text(self.metric.percentLabel)
+                    .font(.caption2.weight(.bold))
+                    .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))
+                    .lineLimit(1)
+            }
+
+            UsageProgressBar(
+                percent: self.metric.percent,
+                tint: self.tint,
+                accessibilityLabel: self.metric.percentStyle.accessibilityLabel)
+                .frame(height: 7)
+
+            if let resetText = self.metric.resetText {
+                Text(resetText)
+                    .font(.caption2)
+                    .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))
+                    .lineLimit(1)
+            }
+        }
+        .padding(.horizontal, 9)
+        .padding(.vertical, 7)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background {
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .fill(MenuHighlightStyle.metricBackground(self.isHighlighted))
+        }
     }
 }
 

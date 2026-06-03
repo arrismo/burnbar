@@ -482,21 +482,24 @@ extension UsageMenuCardView.Model {
 
 struct InlineUsageDashboardContent: View {
     private let model: InlineUsageDashboardModel
+    private let tint: Color?
     @Environment(\.menuItemHighlighted) private var isHighlighted
 
-    init(snapshot: OpenAIAPIUsageSnapshot) {
+    init(snapshot: OpenAIAPIUsageSnapshot, tint: Color? = nil) {
         self.model = UsageMenuCardView.Model.openAIAPIInlineDashboard(snapshot)
+        self.tint = tint
     }
 
-    init(model: InlineUsageDashboardModel) {
+    init(model: InlineUsageDashboardModel, tint: Color? = nil) {
         self.model = model
+        self.tint = tint
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 12) {
             self.kpis
-            MiniUsageBars(model: self.model)
-                .frame(height: 58)
+            MiniUsageBars(model: self.model, tint: self.tint)
+                .frame(height: 64)
                 .accessibilityLabel(self.model.accessibilityLabel)
             self.detailLines
         }
@@ -504,29 +507,29 @@ struct InlineUsageDashboardContent: View {
     }
 
     private var kpis: some View {
-        LazyVGrid(
-            columns: [
-                GridItem(.flexible(minimum: 118), alignment: .leading),
-                GridItem(.flexible(minimum: 100), alignment: .leading),
-            ],
-            alignment: .leading,
-            spacing: 6)
-        {
-            ForEach(Array(self.model.kpis.enumerated()), id: \.offset) { _, kpi in
-                KPIBlock(title: kpi.title, value: kpi.value, emphasis: kpi.emphasis)
+        HStack(alignment: .firstTextBaseline, spacing: 0) {
+            ForEach(Array(self.model.kpis.enumerated()), id: \.offset) { index, kpi in
+                HStack(spacing: 0) {
+                    KPIBlock(title: kpi.title, value: kpi.value, emphasis: kpi.emphasis)
+                    if index < self.model.kpis.count - 1 {
+                        Divider()
+                            .frame(width: 1)
+                            .padding(.vertical, 4)
+                            .padding(.horizontal, 10)
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
     }
 
     private var detailLines: some View {
-        VStack(alignment: .leading, spacing: 3) {
-            ForEach(Array(self.model.detailLines.enumerated()), id: \.offset) { _, line in
-                Text(line)
-                    .font(.caption)
-                    .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))
-                    .lineLimit(1)
-            }
-        }
+        let joined = self.model.detailLines.joined(separator: " · ")
+        return Text(joined)
+            .font(.caption)
+            .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))
+            .lineLimit(2)
+            .fixedSize(horizontal: false, vertical: true)
     }
 
     private struct KPIBlock: View {
@@ -542,11 +545,11 @@ struct InlineUsageDashboardContent: View {
                     .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))
                     .lineLimit(1)
                 Text(self.value)
-                    .font(self.emphasis ? .headline : .subheadline)
+                    .font(self.emphasis ? .subheadline : .footnote)
                     .fontWeight(.semibold)
                     .foregroundStyle(MenuHighlightStyle.primary(self.isHighlighted))
                     .lineLimit(1)
-                    .minimumScaleFactor(0.72)
+                    .minimumScaleFactor(0.68)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
@@ -554,13 +557,14 @@ struct InlineUsageDashboardContent: View {
 
     private struct MiniUsageBars: View {
         let model: InlineUsageDashboardModel
+        let tint: Color?
         @Environment(\.menuItemHighlighted) private var isHighlighted
 
         var body: some View {
             let maxValue = max(self.model.points.map(\.value).max() ?? 0, 1)
-            HStack(alignment: .bottom, spacing: 2) {
+            HStack(alignment: .bottom, spacing: 3) {
                 ForEach(self.model.points) { point in
-                    RoundedRectangle(cornerRadius: 2, style: .continuous)
+                    RoundedRectangle(cornerRadius: 3, style: .continuous)
                         .fill(self.fill(for: point, maxValue: maxValue))
                         .frame(maxWidth: .infinity)
                         .frame(height: self.height(for: point, maxValue: maxValue))
@@ -568,23 +572,21 @@ struct InlineUsageDashboardContent: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-            .overlay(alignment: .bottomLeading) {
-                Rectangle()
-                    .fill(MenuHighlightStyle.secondary(self.isHighlighted).opacity(0.22))
-                    .frame(height: 1)
-            }
         }
 
         private func height(for point: InlineUsageDashboardModel.Point, maxValue: Double) -> CGFloat {
             let ratio = point.value / maxValue
-            guard ratio > 0 else { return 1 }
-            return CGFloat(max(3, min(58, ratio * 58)))
+            guard ratio > 0 else { return 2 }
+            return CGFloat(max(4, min(64, ratio * 64)))
         }
 
         private func fill(for point: InlineUsageDashboardModel.Point, maxValue: Double) -> Color {
             let ratio = max(0.18, min(1, point.value / maxValue))
             if self.isHighlighted {
                 return Color.white.opacity(0.55 + ratio * 0.35)
+            }
+            if let tint {
+                return tint.opacity(0.38 + ratio * 0.54)
             }
             switch self.model.valueStyle {
             case .currencyUSD, .currency:

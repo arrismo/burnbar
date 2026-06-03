@@ -289,6 +289,14 @@ final class SparkleUpdaterController: NSObject, UpdaterProviding, SPUUpdaterDele
     }
 }
 
+private func hasValidSparkleConfiguration(bundle: Bundle = .main) -> Bool {
+    let publicKey = bundle.object(forInfoDictionaryKey: "SUPublicEDKey") as? String
+    let feedURL = bundle.object(forInfoDictionaryKey: "SUFeedURL") as? String
+    return publicKey?.isEmpty == false &&
+        publicKey != "REPLACE_WITH_BURNBAR_SPARKLE_PUBLIC_KEY" &&
+        feedURL?.isEmpty == false
+}
+
 private func isDeveloperIDSigned(bundleURL: URL) -> Bool {
     var staticCode: SecStaticCode?
     guard SecStaticCodeCreateWithPath(bundleURL as CFURL, SecCSFlags(), &staticCode) == errSecSuccess,
@@ -319,7 +327,7 @@ private func makeUpdaterController() -> UpdaterProviding {
             unavailableReason: "Updates managed by Homebrew. Run: brew upgrade --cask steipete/tap/codexbar")
     }
 
-    guard isDeveloperIDSigned(bundleURL: bundleURL) else {
+    guard isDeveloperIDSigned(bundleURL: bundleURL), hasValidSparkleConfiguration() else {
         return DisabledUpdaterController(unavailableReason: "Updates unavailable in this build.")
     }
 

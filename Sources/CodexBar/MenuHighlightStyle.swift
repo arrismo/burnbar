@@ -32,4 +32,12 @@ enum MenuHighlightStyle {
     static func selectionBackground(_ highlighted: Bool) -> Color {
         highlighted ? Color(nsColor: .selectedContentBackgroundColor) : .clear
     }
+
+    static func metricBackground(_ highlighted: Bool) -> Color {
+        highlighted ? Color(nsColor: .selectedContentBackgroundColor).opacity(0.35) : Color.secondary.opacity(0.055)
+    }
+
+    static func cardBackground(_ highlighted: Bool) -> Color {
+        highlighted ? Color(nsColor: .selectedContentBackgroundColor).opacity(0.22) : Color.secondary.opacity(0.045)
+    }
 }

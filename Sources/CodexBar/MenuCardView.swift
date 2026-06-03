@@ -127,16 +127,17 @@ struct UsageMenuCardView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 8) {
             UsageMenuCardHeaderView(model: self.model)
 
             if self.hasDetails {
                 Divider()
+                    .padding(.vertical, 2)
             }
 
             if self.model.metrics.isEmpty {
                 if let dashboard = self.model.inlineUsageDashboard {
-                    InlineUsageDashboardContent(model: dashboard)
+                    InlineUsageDashboardContent(model: dashboard, tint: self.model.progressColor)
                 } else if !self.model.usageNotes.isEmpty {
                     UsageNotesContent(notes: self.model.usageNotes)
                 } else if let placeholder = self.model.placeholder {
@@ -150,9 +151,9 @@ struct UsageMenuCardView: View {
                 let hasProviderCost = self.model.providerCost != nil
                 let hasCost = self.model.tokenUsage != nil || hasProviderCost
 
-                VStack(alignment: .leading, spacing: 12) {
+                VStack(alignment: .leading, spacing: 10) {
                     if hasUsage {
-                        VStack(alignment: .leading, spacing: 12) {
+                        VStack(alignment: .leading, spacing: 8) {
                             ForEach(self.model.metrics, id: \.id) { metric in
                                 MetricRow(
                                     metric: metric,
@@ -160,7 +161,7 @@ struct UsageMenuCardView: View {
                                     progressColor: self.model.progressColor)
                             }
                             if let dashboard = self.model.inlineUsageDashboard {
-                                InlineUsageDashboardContent(model: dashboard)
+                                InlineUsageDashboardContent(model: dashboard, tint: self.model.progressColor)
                             } else if !self.model.usageNotes.isEmpty {
                                 UsageNotesContent(notes: self.model.usageNotes)
                             }
@@ -168,6 +169,7 @@ struct UsageMenuCardView: View {
                     }
                     if hasUsage, hasCredits || hasCost {
                         Divider()
+                            .padding(.vertical, 2)
                     }
                     if let credits = self.model.creditsText {
                         CreditsBarContent(
@@ -179,6 +181,7 @@ struct UsageMenuCardView: View {
                     }
                     if hasCredits, hasCost {
                         Divider()
+                            .padding(.vertical, 2)
                     }
                     if let providerCost = self.model.providerCost {
                         ProviderCostContent(
@@ -187,12 +190,13 @@ struct UsageMenuCardView: View {
                     }
                     if hasProviderCost, self.model.tokenUsage != nil {
                         Divider()
+                            .padding(.vertical, 2)
                     }
                     if let tokenUsage = self.model.tokenUsage {
-                        VStack(alignment: .leading, spacing: 6) {
+                        VStack(alignment: .leading, spacing: 4) {
                             Text("cost_header_estimated")
-                                .font(.body)
-                                .fontWeight(.medium)
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
                             Text(tokenUsage.sessionLine)
                                 .font(.footnote)
                             Text(tokenUsage.monthLine)
@@ -217,12 +221,10 @@ struct UsageMenuCardView: View {
                         }
                     }
                 }
-                .padding(.bottom, self.model.creditsText == nil ? 6 : 0)
             }
         }
         .padding(.horizontal, 14)
-        .padding(.top, 8)
-        .padding(.bottom, 8)
+        .padding(.vertical, 10)
         .frame(width: self.width, alignment: .leading)
     }
 
@@ -238,48 +240,54 @@ private struct UsageMenuCardHeaderView: View {
     @Environment(\.menuItemHighlighted) private var isHighlighted
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            HStack(alignment: .center, spacing: 9) {
-                Image(systemName: "flame.fill")
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundStyle(.orange)
-                    .frame(width: 24, height: 24)
-                    .background(Circle().fill(Color.orange.opacity(self.isHighlighted ? 0.24 : 0.16)))
-                VStack(alignment: .leading, spacing: 2) {
-                    HStack(alignment: .firstTextBaseline) {
-                        Text(self.model.providerName).font(.headline)
-                            .fontWeight(.bold)
-                            .lineLimit(1).truncationMode(.tail).layoutPriority(1)
-                        Spacer()
-                        Text(self.model.email).font(.subheadline)
+        HStack(alignment: .top, spacing: 10) {
+            Image(systemName: "flame.fill")
+                .font(.system(size: 15, weight: .semibold))
+                .foregroundStyle(.orange)
+                .frame(width: 28, height: 28)
+                .background(Circle().fill(Color.orange.opacity(self.isHighlighted ? 0.22 : 0.14)))
+
+            VStack(alignment: .leading, spacing: 3) {
+                HStack(alignment: .firstTextBaseline, spacing: 8) {
+                    Text(self.model.providerName)
+                        .font(.system(size: 15, weight: .bold))
+                        .lineLimit(1)
+                        .truncationMode(.tail)
+
+                    if let plan = self.model.planText {
+                        Text(plan)
+                            .font(.system(size: 10, weight: .semibold))
                             .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))
-                            .lineLimit(1).truncationMode(.middle)
+                            .lineLimit(1)
+                            .padding(.horizontal, 7)
+                            .padding(.vertical, 2)
+                            .background(
+                                Capsule()
+                                    .fill(MenuHighlightStyle.secondary(self.isHighlighted).opacity(0.12)))
                     }
-                    let subtitleAlignment: VerticalAlignment = if self.model.subtitleStyle == .error {
-                        .top
-                    } else {
-                        .firstTextBaseline
+
+                    Spacer(minLength: 4)
+
+                    Text(self.model.email)
+                        .font(.caption)
+                        .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))
+                        .lineLimit(1)
+                        .truncationMode(.middle)
+                }
+
+                HStack(alignment: .firstTextBaseline, spacing: 4) {
+                    Text(self.model.subtitleText)
+                        .font(.caption)
+                        .foregroundStyle(self.subtitleColor)
+                        .lineLimit(self.model.subtitleStyle == .error ? 3 : 1)
+                        .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
+
+                    if self.model.subtitleStyle == .error, !self.model.subtitleText.isEmpty {
+                        CopyIconButton(copyText: self.model.subtitleText, isHighlighted: self.isHighlighted)
                     }
-                    HStack(alignment: subtitleAlignment) {
-                        Text(self.model.subtitleText)
-                            .font(.footnote)
-                            .foregroundStyle(self.subtitleColor)
-                            .lineLimit(self.model.subtitleStyle == .error ? 4 : 1)
-                            .multilineTextAlignment(.leading)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .layoutPriority(1)
-                            .padding(.bottom, self.model.subtitleStyle == .error ? 4 : 0)
-                        Spacer()
-                        if self.model.subtitleStyle == .error, !self.model.subtitleText.isEmpty {
-                            CopyIconButton(copyText: self.model.subtitleText, isHighlighted: self.isHighlighted)
-                        }
-                        if let plan = self.model.planText {
-                            Text(plan)
-                                .font(.footnote)
-                                .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))
-                                .lineLimit(1)
-                        }
-                    }
+
+                    Spacer(minLength: 0)
                 }
             }
         }
@@ -302,8 +310,8 @@ private struct ProviderCostContent: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(self.section.title)
-                .font(.body)
-                .fontWeight(.medium)
+                .font(.subheadline)
+                .fontWeight(.semibold)
             if let percentUsed = self.section.percentUsed {
                 UsageProgressBar(
                     percent: percentUsed,
@@ -332,9 +340,22 @@ private struct MetricRow: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text(self.title)
-                .font(.body)
-                .fontWeight(.medium)
+            HStack(alignment: .firstTextBaseline, spacing: 4) {
+                Text(self.title)
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .lineLimit(1)
+
+                Spacer(minLength: 4)
+
+                if let resetText = self.metric.resetText {
+                    Text(resetText)
+                        .font(.caption)
+                        .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))
+                        .lineLimit(1)
+                }
+            }
+
             if let statusText = self.metric.statusText {
                 Text(statusText)
                     .font(.footnote)
@@ -348,56 +369,47 @@ private struct MetricRow: View {
                     pacePercent: self.metric.pacePercent,
                     paceOnTop: self.metric.paceOnTop,
                     warningMarkerPercents: self.metric.warningMarkerPercents)
-                VStack(alignment: .leading, spacing: 2) {
-                    HStack(alignment: .firstTextBaseline) {
-                        Text(self.metric.percentLabel)
-                            .font(.footnote)
+
+                HStack(alignment: .firstTextBaseline, spacing: 4) {
+                    Text(self.metric.percentLabel)
+                        .font(.caption)
+                        .fontWeight(.medium)
+                        .lineLimit(1)
+
+                    Spacer(minLength: 4)
+
+                    if let detailLeft = self.metric.detailLeftText {
+                        Text(detailLeft)
+                            .font(.caption2)
+                            .foregroundStyle(MenuHighlightStyle.primary(self.isHighlighted))
                             .lineLimit(1)
-                        Spacer()
-                        if let rightLabel = self.metric.resetText {
-                            Text(rightLabel)
-                                .font(.footnote)
-                                .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))
-                                .lineLimit(1)
-                        }
-                    }
-                    if self.metric.detailLeftText != nil || self.metric.detailRightText != nil {
-                        HStack(alignment: .firstTextBaseline) {
-                            if let detailLeft = self.metric.detailLeftText {
-                                Text(detailLeft)
-                                    .font(.footnote)
-                                    .foregroundStyle(MenuHighlightStyle.primary(self.isHighlighted))
-                                    .lineLimit(1)
-                            }
-                            Spacer()
-                            if let detailRight = self.metric.detailRightText {
-                                Text(detailRight)
-                                    .font(.footnote)
-                                    .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))
-                                    .lineLimit(1)
-                            }
-                        }
                     }
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
+
+                if let detailRight = self.metric.detailRightText {
+                    HStack(alignment: .firstTextBaseline, spacing: 4) {
+                        Spacer(minLength: 0)
+                        Text(detailRight)
+                            .font(.caption2)
+                            .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))
+                            .lineLimit(1)
+                    }
+                }
+
                 if let detail = self.metric.detailText {
                     Text(detail)
-                        .font(.footnote)
+                        .font(.caption2)
                         .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))
                         .lineLimit(1)
                 }
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(10)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 8)
         .background {
-            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .fill(Color.secondary.opacity(self.isHighlighted ? 0.20 : 0.07))
-        }
-        .overlay(alignment: .leading) {
-            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .fill(self.progressColor.opacity(self.isHighlighted ? 0.75 : 0.55))
-                .frame(width: 3)
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .fill(MenuHighlightStyle.metricBackground(self.isHighlighted))
         }
     }
 }
@@ -431,10 +443,11 @@ struct UsageMenuCardHeaderSectionView: View {
 
             if self.showDivider {
                 Divider()
+                    .padding(.vertical, 2)
             }
         }
         .padding(.horizontal, 16)
-        .padding(.top, 2)
+        .padding(.top, 4)
         .padding(.bottom, self.model.subtitleStyle == .error ? 2 : 0)
         .frame(width: self.width, alignment: .leading)
     }
@@ -448,10 +461,10 @@ struct UsageMenuCardUsageSectionView: View {
     @Environment(\.menuItemHighlighted) private var isHighlighted
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 8) {
             if self.model.metrics.isEmpty {
                 if let dashboard = self.model.inlineUsageDashboard {
-                    InlineUsageDashboardContent(model: dashboard)
+                    InlineUsageDashboardContent(model: dashboard, tint: self.model.progressColor)
                 } else if !self.model.usageNotes.isEmpty {
                     UsageNotesContent(notes: self.model.usageNotes)
                 } else if let placeholder = self.model.placeholder {
@@ -467,17 +480,18 @@ struct UsageMenuCardUsageSectionView: View {
                         progressColor: self.model.progressColor)
                 }
                 if let dashboard = self.model.inlineUsageDashboard {
-                    InlineUsageDashboardContent(model: dashboard)
+                    InlineUsageDashboardContent(model: dashboard, tint: self.model.progressColor)
                 } else if !self.model.usageNotes.isEmpty {
                     UsageNotesContent(notes: self.model.usageNotes)
                 }
             }
             if self.showBottomDivider {
                 Divider()
+                    .padding(.vertical, 2)
             }
         }
         .padding(.horizontal, 14)
-        .padding(.top, 10)
+        .padding(.top, 8)
         .padding(.bottom, self.bottomPadding)
         .frame(width: self.width, alignment: .leading)
     }
@@ -535,8 +549,8 @@ private struct CreditsBarContent: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text("Credits")
-                .font(.body)
-                .fontWeight(.medium)
+                .font(.subheadline)
+                .fontWeight(.semibold)
             if let percentLeft {
                 UsageProgressBar(
                     percent: percentLeft,
@@ -579,12 +593,12 @@ struct UsageMenuCardCostSectionView: View {
         let hasTokenCost = self.model.tokenUsage != nil
         return Group {
             if hasTokenCost {
-                VStack(alignment: .leading, spacing: 10) {
+                VStack(alignment: .leading, spacing: 8) {
                     if let tokenUsage = self.model.tokenUsage {
-                        VStack(alignment: .leading, spacing: 6) {
+                        VStack(alignment: .leading, spacing: 4) {
                             Text("cost_header_estimated")
-                                .font(.body)
-                                .fontWeight(.medium)
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
                             Text(tokenUsage.sessionLine)
                                 .font(.caption)
                             Text(tokenUsage.monthLine)
