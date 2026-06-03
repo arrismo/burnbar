@@ -18,7 +18,7 @@ struct GeminiTestEnvironment {
         let geminiDir = root.appendingPathComponent(".gemini")
         try FileManager.default.createDirectory(at: geminiDir, withIntermediateDirectories: true)
         let antigravityDir = root
-            .appendingPathComponent(".codexbar")
+            .appendingPathComponent(".burnbar")
             .appendingPathComponent("antigravity")
         try FileManager.default.createDirectory(at: antigravityDir, withIntermediateDirectories: true)
         self.homeURL = root
